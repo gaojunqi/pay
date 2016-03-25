@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>pay-common-parent</artifactId>
+        <groupId>com.lhs.pay.common</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pay-common-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lhs.pay.service</groupId>
+    <artifactId>pay-service-user</artifactId>
+    <packaging>jar</packaging>
+
+    <name>pay-service-user</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>wusc.edu.pay.common</groupId>
+            <artifactId>pay-common</artifactId>
+            <version>${pay-common.version}</version>
+        </dependency>
+
+<!--        <dependency>
+            <groupId>wusc.edu.pay.common</groupId>
+            <artifactId>pay-common-config</artifactId>
+            <version>${env}-${pay-common-config.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>wusc.edu.pay.common</groupId>
+            <artifactId>pay-common-core</artifactId>
+            <version>${pay-common-core.version}</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>com.lhs.pay.facade</groupId>
+            <artifactId>pay-facade-user</artifactId>
+            <version>${pay-facade-user.version}</version>
+        </dependency>
+    </dependencies>
+</project>

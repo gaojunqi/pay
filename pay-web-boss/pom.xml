@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>pay-common-parent</artifactId>
+        <groupId>com.lhs.pay.common</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pay-common-parent/pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.lhs.pay.web</groupId>
+    <artifactId>pay-web-boss</artifactId>
+    <version>${pay-web-boss.version}</version>
+    <packaging>war</packaging>
+
+
+    <name>pay-web-boss</name>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.lhs.pay.common</groupId>
+            <artifactId>pay-common-web</artifactId>
+            <version>${pay-common-web.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>pay-boss-web</finalName>
+    </build>
+</project>
