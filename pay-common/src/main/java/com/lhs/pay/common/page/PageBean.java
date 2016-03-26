@@ -70,26 +70,58 @@ public class PageBean implements Serializable {
         this.recordList = recordList;
 
         //计算总页码
-        this.pageCount = (totalCount + numPerPage - 1) / numPerPage;
+        pageCount = (totalCount + numPerPage - 1) / numPerPage;
 
         //计算beginPageIndex和endPageIndex
-        if (this.pageCount <= 10) {//总页数不多于10
-            this.beginPageIndex = 1;
+        if (pageCount <= 10) {//总页数不多于10
+            beginPageIndex = 1;
             endPageIndex = pageCount;
         } else {//总页数大于10
-            this.beginPageIndex = currentPage - 4;
-            this.endPageIndex = currentPage + 5;
+            beginPageIndex = currentPage - 4;
+            endPageIndex = currentPage + 5;
 
             //当前面的页码不足4个时，则显示前10个号码
-            if (this.beginPageIndex < 1) {
-                this.beginPageIndex = 1;
-                this.endPageIndex = 10;
+            if (beginPageIndex < 1) {
+                beginPageIndex = 1;
+                endPageIndex = 10;
             }
 
             //当后面页码不足5个时，则显示后10个页码
-            if (this.endPageIndex > this.pageCount) {
-                this.endPageIndex = this.pageCount;
-                this.beginPageIndex = this.pageCount - 10 + 1;
+            if (endPageIndex > pageCount) {
+                endPageIndex = pageCount;
+                beginPageIndex = pageCount - 10 + 1;
+            }
+        }
+    }
+
+    public PageBean(int currentPage, int numPerPage, int totalCount, List<Object> recordList, Map<String, Object> countResultMap) {
+        this.currentPage = currentPage;
+        this.numPerPage = numPerPage;
+        this.totalCount = totalCount;
+        this.recordList = recordList;
+        this.countResultMap = countResultMap;
+
+        //计算总页码
+        pageCount = (totalCount + numPerPage -1) / numPerPage;
+
+        //计算beginPageIndex 和 endPageIndex
+        if (pageCount <= 10) {
+            beginPageIndex = 1;
+            endPageIndex = pageCount;
+        } else {//当前页附近的共10个页码（前4个 + 当前页 + 后5个）
+            beginPageIndex = currentPage - 4;
+            endPageIndex = currentPage;
+
+            //当前页码不足4时，则显示前10个号码
+            if (beginPageIndex < 1) {
+                beginPageIndex = 1;
+                endPageIndex = 10;
+            }
+
+            //当后面的页码不足5个时，则显示后10个页码
+            if (endPageIndex > pageCount) {
+                endPageIndex = pageCount;
+                beginPageIndex = pageCount - 10 + 1;
             }
         }
     }
