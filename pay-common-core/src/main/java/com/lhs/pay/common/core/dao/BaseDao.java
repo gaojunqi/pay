@@ -85,6 +85,8 @@ public interface BaseDao<T> {
      */
     List<T> listBy(Map<String, Object> paramMap);
 
+    List<Object> listBy(Map<String, Object> paramMap, String sqlId);
+
     /**
      * 根据条件查询
      *
