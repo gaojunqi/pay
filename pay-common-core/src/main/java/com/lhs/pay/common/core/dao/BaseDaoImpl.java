@@ -95,7 +95,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
         return result;
     }
 
-    private String getStatement(String sqlId) {
+    public String getStatement(String sqlId) {
         String name = this.getClass().getName();
 
         StringBuffer sb = new StringBuffer().append(name).append(".").append(sqlId);

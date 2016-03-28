@@ -1,5 +1,7 @@
 package com.lhs.pay.facade.user.entity;
 
+import com.lhs.pay.common.entity.BaseEntity;
+
 /**
  * MemberInfo
  * 会员信息实体
@@ -7,7 +9,7 @@ package com.lhs.pay.facade.user.entity;
  * @author longhuashen
  * @since 16/3/21
  */
-public class MemberInfo {
+public class MemberInfo extends BaseEntity {
 
     /**
      * 会员编号
