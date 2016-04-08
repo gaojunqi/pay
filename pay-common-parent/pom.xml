@@ -29,10 +29,10 @@
 
         <!-- 测试环境  -->
         <profile>
-            <id>test-mysql</id>
+            <id>test-mybatis</id>
             <properties>
                 <!-- 部署环境(对应配置文件版本) -->
-                <env>test-mysql</env>
+                <env>test-mybatis</env>
             </properties>
         </profile>
 
@@ -46,10 +46,16 @@
         <pay-common-core.version>1.0-SNAPSHOT</pay-common-core.version>
         <pay-common-web.version>1.0-SNAPSHOT</pay-common-web.version>
 
+
+        <!--facade-->
+        <pay-facade-user.version>1.0-SNAPSHOT</pay-facade-user.version>
+
+        <!--service-->
+        <pay-service-user.version>1.0-SNAPSHOT</pay-service-user.version>
+
         <!-- web projects -->
         <pay-web-boss.version>1.0-SNAPSHOT</pay-web-boss.version>
 
-        <pay-facade-user.version>1.0-SNAPSHOT</pay-facade-user.version>
 
         <org.springframework.version>4.1.4.RELEASE</org.springframework.version>
         <org.apache.struts.version>2.3.15.1</org.apache.struts.version>

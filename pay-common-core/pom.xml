@@ -10,10 +10,13 @@
 
     <groupId>com.lhs.pay.common</groupId>
     <artifactId>pay-common-core</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>pay-common-core</name>
     <url>http://maven.apache.org</url>
+    <modules>
+        <module>../pay-common-config</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

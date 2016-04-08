@@ -48,23 +48,26 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
      */
     public static final String SQL_COUNT_BY_PAGE_PARAM = "countByPageParam";
 
+    /**
+     * 注入sessionTemplate实例(要求Spring中进行sessionTemplate的配置).<br/>
+     * 可以调用sessionTemplate完成数据库操作.
+     */
     @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
+    private SqlSessionTemplate sessionTemplate;
 
     @Autowired
-    private SqlSessionFactory sqlSessionFactory;
+    protected SqlSessionFactory sqlSessionFactory;
 
     @Autowired
     private DruidDataSource druidDataSource;
 
 
-    public SqlSessionTemplate getSqlSessionTemplate() {
-        return sqlSessionTemplate;
+    public SqlSessionTemplate getSessionTemplate() {
+        return sessionTemplate;
     }
 
-    @Override
-    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-        this.sqlSessionTemplate = sqlSessionTemplate;
+    public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
+        this.sessionTemplate = sessionTemplate;
     }
 
     public SqlSessionFactory getSqlSessionFactory() {
@@ -83,7 +86,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
             throw new RuntimeException("T is null");
         }
 
-        int result = sqlSessionTemplate.insert(getStatement(SQL_INSERT), entity);
+        int result = sessionTemplate.insert(getStatement(SQL_INSERT), entity);
 
         if (result <= 0) {
             throw BizException.DB_INSERT_RESULT_0;
@@ -109,7 +112,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
             return 0;
         }
 
-        int result = sqlSessionTemplate.insert(getStatement(SQL_BATCH_INSERT), list);
+        int result = sessionTemplate.insert(getStatement(SQL_BATCH_INSERT), list);
 
         if (result <= 0) {
              throw BizException.DB_INSERT_RESULT_0;
@@ -123,7 +126,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
             throw new RuntimeException("entity is null");
         }
 
-        int result = sqlSessionTemplate.update(getStatement(SQL_UPDATE), entity);
+        int result = sessionTemplate.update(getStatement(SQL_UPDATE), entity);
         if (result <= 0) {
             throw BizException.DB_UPDATE_RESULT_0;
         }
@@ -146,12 +149,12 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 
     @Override
     public T getById(long id) {
-        return sqlSessionTemplate.selectOne(getStatement(SQL_GET_BY_ID), id);
+        return sessionTemplate.selectOne(getStatement(SQL_GET_BY_ID), id);
     }
 
     @Override
     public long deleteById(long id) {
-        return (long) sqlSessionTemplate.delete(getStatement(SQL_DELETE_BY_ID), id);
+        return (long) sessionTemplate.delete(getStatement(SQL_DELETE_BY_ID), id);
     }
 
     @Override
@@ -172,7 +175,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
         //是否统计当前分页条件下的数据 1：是，其他否
         Object isCount = paramMap.get("isCount");
         if (isCount != null && "1".equals(isCount.toString())) {
-            Map<String, Object> countResultMap = sqlSessionTemplate.selectOne(getStatement(SQL_COUNT_BY_PAGE_PARAM), paramMap);
+            Map<String, Object> countResultMap = sessionTemplate.selectOne(getStatement(SQL_COUNT_BY_PAGE_PARAM), paramMap);
             return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), count.intValue(), list, countResultMap);
         } else {
             return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), count.intValue(), list);
@@ -207,7 +210,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
             paramMap = new HashMap<>();
         }
 
-        return sqlSessionTemplate.selectList(getStatement(sqlId), paramMap);
+        return sessionTemplate.selectList(getStatement(sqlId), paramMap);
     }
 
     @Override
@@ -227,7 +230,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
     public String getSeqNextValue(String seqName) {
         boolean isClosedConn = false;
         //获取当前线程的连接
-        Connection connection = this.sqlSessionTemplate.getConnection();
+        Connection connection = this.sessionTemplate.getConnection();
         //获取Mybatis的SQLRunner类
         SqlRunner sqlRunner = null;
         try {
@@ -244,7 +247,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
                 sql = "SELECT" + seqName.toUpperCase() + ".NEXTVAL FROM DUAL";
             }
 
-            if (driverClass.equals("com.mysql,jdbc.Driver")) {
+            if (driverClass.equals("com.mybatis,jdbc.Driver")) {
                 sql = "SELECT FUN_SEQ('" + seqName.toUpperCase() + "')";
             }
 
@@ -269,10 +272,5 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
                 sqlRunner.closeConnection();
             }
         }
-    }
-
-    @Override
-    public SqlSessionTemplate getSessionTemplate() {
-        return sqlSessionTemplate;
     }
 }

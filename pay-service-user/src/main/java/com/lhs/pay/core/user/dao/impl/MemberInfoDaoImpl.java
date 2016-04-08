@@ -3,6 +3,7 @@ package com.lhs.pay.core.user.dao.impl;
 import com.lhs.pay.common.core.dao.BaseDaoImpl;
 import com.lhs.pay.core.user.dao.MemberInfoDao;
 import com.lhs.pay.facade.user.entity.MemberInfo;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import java.util.Map;
  * @author longhuashen
  * @since 16/3/28
  */
+@Repository("memberInfoDao")
 public class MemberInfoDaoImpl extends BaseDaoImpl<MemberInfo> implements MemberInfoDao {
 
     @Override

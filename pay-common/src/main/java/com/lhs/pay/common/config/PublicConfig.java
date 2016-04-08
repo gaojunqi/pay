@@ -117,7 +117,7 @@ public class PublicConfig {
     /**
      * 密码错误次数值 将出现验证码，如果值为0 则永远不会出现验证码
      */
-    public final static Integer PWD_TIMES_USE_KAPCTHA = Integer.parseInt(PUBLIC_USER.get("PWD_TIMES_USE_KAPCTHA"));
+    public final static Integer PWD_TIMES_USE_KAPCTHA = Integer.parseInt(PUBLIC_USER.get("PWD_TIMES_USE_KAPTCHA"));
 
     /**
      * 是否使用CFCA密码控件

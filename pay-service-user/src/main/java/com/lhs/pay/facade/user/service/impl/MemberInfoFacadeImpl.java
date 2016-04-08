@@ -21,7 +21,7 @@ import java.util.Map;
  * @author longhuashen
  * @since 16/3/21
  */
-@Service("memberIinfoFacade")
+@Service("memberInfoFacade")
 public class MemberInfoFacadeImpl implements MemberInfoFacade {
 
     @Autowired
