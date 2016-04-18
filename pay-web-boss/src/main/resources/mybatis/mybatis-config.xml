@@ -40,13 +40,21 @@
 
 	<!-- 类型别名是为 Java类型命名一个短的名字。 它只和 XML配置有关,只用来减少类完全 限定名的多余部分 -->
 	<typeAliases>
-
+		<typeAlias alias="PmsAction" type="com.lhs.pay.web.permission.entity.PmsAction" />
+		<typeAlias alias="PmsMenu" type="com.lhs.pay.web.permission.entity.PmsMenu" />
+		<typeAlias alias="PmsOperator" type="com.lhs.pay.web.permission.entity.PmsOperator" />
+		<typeAlias alias="PmsRoleAction" type="com.lhs.pay.web.permission.entity.PmsRoleAction" />
+		<typeAlias alias="PmsRoleOperator" type="com.lhs.pay.web.permission.entity.PmsRoleOperator" />
 	</typeAliases>
 
 
 
 	<mappers>
-
+		<mapper resource="mybatis/mapper/PmsAction.Mapper.xml" />
+		<mapper resource="mybatis/mapper/PmsMenu.Mapper.xml" />
+		<mapper resource="mybatis/mapper/PmsOperator.Mapper.xml" />
+		<mapper resource="mybatis/mapper/PmsRoleAction.Mapper.xml" />
+		<mapper resource="mybatis/mapper/PmsRoleOperator.Mapper.xml" />
 	</mappers>
 
 </configuration>

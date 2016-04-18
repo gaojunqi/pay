@@ -9,6 +9,7 @@ import com.lhs.pay.common.page.PageBean;
 import com.lhs.pay.common.page.PageParam;
 import org.apache.ibatis.jdbc.SqlRunner;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -70,13 +71,8 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
         this.sessionTemplate = sessionTemplate;
     }
 
-    public SqlSessionFactory getSqlSessionFactory() {
-        return sqlSessionFactory;
-    }
-
-    @Override
-    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
+    public SqlSession getSqlSession() {
+        return super.getSqlSession();
     }
 
 

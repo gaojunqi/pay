@@ -28,7 +28,7 @@
 		</div>
 		<div id="login_content">
 			<div class="loginForm">
-				<form action="login_operatorLogin.action" method="post">
+				<form action="${pageContext.request.contextPath}/login" method="post">
 					<p>
 						<label>用户名：</label>
 						<input name="loginName" type="text" style="width:140px;height:20px;" class="login_input" value="${loginName }" />

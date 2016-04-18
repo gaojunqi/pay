@@ -166,7 +166,7 @@ public class PublicConfig {
     /**
      * 是否是 域名 + 应用名
      */
-    public final static boolean IS_USER_DOMAIN_NAME = Boolean.parseBoolean(PUBLIC_USER.get("IS_USER_DOMAIN_NAME"));
+    public final static boolean IS_USE_DOMAIN_NAME = Boolean.parseBoolean(PUBLIC_USER.get("IS_USER_DOMAIN_NAME"));
 
     /**
      * 是否采用SSL协议
