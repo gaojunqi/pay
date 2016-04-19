@@ -5,7 +5,9 @@ import com.lhs.pay.web.permission.dao.IPmsMenuDao;
 import com.lhs.pay.web.permission.entity.PmsMenu;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * PmsMenuDaoImpl
@@ -19,6 +21,22 @@ public class PmsMenuDaoImpl extends BaseDaoImpl<PmsMenu> implements IPmsMenuDao{
 
     @Override
     public List listByRoleIds(String roleIdStr) {
-        return null;
+        List<String> roleIds = Arrays.asList(roleIdStr.split(","));
+        return super.getSqlSession().selectList(getStatement("listByRoleIds"), roleIds);
+    }
+
+    @Override
+    public List listByParent(String parentId) {
+        return super.getSqlSession().selectList(getStatement("listByParent"), parentId);
+    }
+
+    @Override
+    public List<PmsMenu> listByParentId(String parentId) {
+        return super.getSqlSession().selectList(getStatement("listByParentId"), parentId);
+    }
+
+    @Override
+    public List<PmsMenu> getMenuByNameAndIsLeaf(Map<String, Object> map) {
+        return super.getSqlSession().selectList(getStatement("listBy"), map);
     }
 }

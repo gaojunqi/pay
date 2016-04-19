@@ -35,7 +35,7 @@ public class ContextLoaderInit extends HttpServlet {
         context.setAttribute("COMPANY_HR_EMAIL", PublicConfig.COMPANY_HR_EMAIL);
 
         //是 否 域名+应用名
-        context.setAttribute("IS_USE_DOMAIN_NAME", PublicConfig.IS_USER_DOMAIN_NAME);
+        context.setAttribute("IS_USE_DOMAIN_NAME", PublicConfig.IS_USE_DOMAIN_NAME);
         context.setAttribute("FILE_SYS_URL", PublicConfig.FILE_SYS_URL);
 
     }
