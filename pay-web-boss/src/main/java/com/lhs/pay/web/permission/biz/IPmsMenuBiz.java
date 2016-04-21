@@ -22,9 +22,9 @@ public interface IPmsMenuBiz {
 
     List listByRoleIds(String roleIdsStr);
 
-    void createMenu(PmsMenu pmsMenu);
+    void createMenu(PmsMenu pmsMenu) throws PermissionException;
 
-    String getMenuIdsByRoleId(Long roleId);
+    String getMenuIdsByRoleId(Long roleId) throws PermissionException;
 
     /**
      * 根据已有的菜单ID集合、角色的功能点集合，生成菜单权限树

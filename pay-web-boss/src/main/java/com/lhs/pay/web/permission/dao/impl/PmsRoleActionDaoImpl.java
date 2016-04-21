@@ -16,7 +16,7 @@ import java.util.List;
  * @since 16/4/18
  */
 @Repository("pmsRoleActionDao")
-public class PmsRoleActionDaoImpl extends BaseDaoImpl<PmsRole> implements IPmsRoleActionDao {
+public class PmsRoleActionDaoImpl extends BaseDaoImpl<PmsRoleAction> implements IPmsRoleActionDao {
 
 
     @Override

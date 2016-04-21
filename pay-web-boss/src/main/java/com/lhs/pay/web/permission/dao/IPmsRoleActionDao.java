@@ -1,7 +1,6 @@
 package com.lhs.pay.web.permission.dao;
 
 import com.lhs.pay.common.core.dao.BaseDao;
-import com.lhs.pay.web.permission.entity.PmsRole;
 import com.lhs.pay.web.permission.entity.PmsRoleAction;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
  * @author longhuashen
  * @since 16/4/18
  */
-public interface IPmsRoleActionDao extends BaseDao<PmsRole> {
+public interface IPmsRoleActionDao extends BaseDao<PmsRoleAction> {
 
     /**
      * 根据角色ID找到角色关联的权限点

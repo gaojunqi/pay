@@ -31,7 +31,7 @@ public class PmsMenuDaoImpl extends BaseDaoImpl<PmsMenu> implements IPmsMenuDao{
     }
 
     @Override
-    public List<PmsMenu> listByParentId(String parentId) {
+    public List<PmsMenu> listByParentId(Long parentId) {
         return super.getSqlSession().selectList(getStatement("listByParentId"), parentId);
     }
 

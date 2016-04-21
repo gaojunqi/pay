@@ -36,7 +36,7 @@ public interface IPmsMenuDao extends BaseDao<PmsMenu> {
      * @param parentId
      * @return
      */
-    List<PmsMenu> listByParentId(String parentId);
+    List<PmsMenu> listByParentId(Long parentId);
 
     /**
      * 根据名称和是否叶子节点查询数据
