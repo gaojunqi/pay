@@ -17,6 +17,8 @@
 			<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 			<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
+
+	<mvc:resources location="/statics/" mapping="/statics/**"/>
 	
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
 			<mvc:message-converters register-defaults="true">

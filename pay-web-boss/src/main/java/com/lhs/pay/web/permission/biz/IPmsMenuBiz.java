@@ -96,4 +96,6 @@ public interface IPmsMenuBiz {
      * @return
      */
     int countMenuByRoleId(Long roleId);
+
+    List<PmsMenu> buildTree(String roleIds);
 }

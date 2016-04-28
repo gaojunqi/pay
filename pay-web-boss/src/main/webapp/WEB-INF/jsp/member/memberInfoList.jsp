@@ -1,106 +1,120 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/page/inc/taglib.jsp"%>
-<div class="pageHeader">
-	<form id="pagerForm" onsubmit="return navTabSearch(this);" action="memberInfo_listMemberInfo.action" method="post">
-	<!-- 分页表单参数 -->
-    <%@include file="/page/inc/pageForm.jsp"%>
-	<div class="searchBar">
-		<table class="searchContent">
-			<tr>
-				<td >
-					<span>会员编号：</span>
-					<input type="text" id="memberNo" name="memberNo" value="${memberNo}" size="27" alt="精确搜索"/>
-				</td>
-				<td>
-					<span>真实姓名：</span>
-					<input type="text" id="realName" name="realName" value="${realName}" size="20"  alt="模糊搜索"/>
-				</td>
-				<td>
-					<span>身份证号：</span>
-					<input type="text" id="cardNo" name="cardNo" value="${cardNo}" size="20" alt="精确搜索"/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<span>注册时间：</span>
-					<input type="text" name="startDate" value="${startDate }" id="beginDateMemberList" class="date"  size="10" readonly="true" />-
-					<input type="text" name="endDate" value="${endDate }" id="endDateMemberList" class="date" size="10" readonly="true" />
-<!-- 					<a href="#" id="a_Date_1" style="color:blue;" onclick="selectDateMemberList('toDay',this)">今天</a>
-				&nbsp;	<a href="#" id="a_Date_3" style="color:blue;" onclick="selectDateMemberList('currentMonth',this)"class="Fcurrent">本月</a>
-				&nbsp;	<a href="#" id="a_Date_2" style="color:blue;" onclick="selectDateMemberList('lastMonth',this)">上月</a>
-				&nbsp;	<a href="#" id="clear" style="color:blue;" onclick="clearFormMemberList()">清空条件</a> -->
-				</td>
-				<td>
-					<span>状态：</span>
-					<select name="status" id="status">
-						<option value="">--请选择--</option>
-						<c:forEach items="${memberStatusList }" var="model">
-							<option value="${model.value }"
-							<c:if test="${status eq model.value}">selected="selected"</c:if>>${model.desc }</option>
-						</c:forEach>
-					</select>
-				</td>
-				<td>
-					<div class="subBar" >
-						<ul>
-							<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
-						</ul>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</div>
+<html>
+<head>
+
+	<title>短信查询</title>
+	<%@ include file="/WEB-INF/jsp/inc/easyui.jsp"%>
+	<link href="${ctx}/statics/button.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+		/*
+		 *短信查询
+		 */
+		function searchSmslog(){
+			/*
+			 $('#dg').datagrid({
+			 url:'system/smslog!querySmslogPage.action'
+			 });
+
+			 $('#dg').datagrid('load',{
+			 phoneNum:$("#phoneNum").val(),
+			 startTime:$("#beginTime").datebox('getValue'),
+			 endTime:$("#endTime").datebox('getValue')
+			 });
+			 $('#dg').datagrid('load',{
+			 url:url,
+			 phoneNum:$("#phoneNum").val(),
+			 startTime:$("#beginTime").datebox('getValue'),
+			 endTime:$("#endTime").datebox('getValue')
+			 });
+			 */
+			var url = "system/smslog!querySmslogPage.action";
+
+			$('#dg').datagrid({
+				url:url,
+				queryParams:{
+					phoneNum:$("#phoneNum").val(),
+					startTime:$("#beginTime").datebox('getValue'),
+					endTime:$("#endTime").datebox('getValue')
+				}
+			});
+		}
+
+		function setStatus(val,row) {
+			var status = "";
+			if(val == "0") {
+				status = "发送中";
+			}
+
+			if(val == "1") {
+				status = "发送暂缓";
+			}
+
+			if(val == "2") {
+				status = "发送失败";
+			}
+
+			if(val == "3") {
+				status = "接收成功";
+			}
+			return status;
+		}
+
+		Date.prototype.Format = function (fmt) { //author: meizz
+			var o = {
+				"M+": this.getMonth() + 1, //月份
+				"d+": this.getDate(), //日
+				"h+": this.getHours(), //小时
+				"m+": this.getMinutes(), //分
+				"s+": this.getSeconds(), //秒
+				"q+": Math.floor((this.getMonth() + 3) / 3), //季度
+				"S": this.getMilliseconds() //毫秒
+			};
+			if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+			for (var k in o)
+				if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+			return fmt;
+		}
+
+		$(function(){
+			var today=new Date(); // 获取今天时间
+			today.setDate(today.getDate() + 1); // 系统会自动转换
+
+			$("#beginTime").datebox('setValue',new Date().Format("yyyy-MM-dd"));
+			$("#endTime").datebox('setValue',today.Format("yyyy-MM-dd"));
+		});
+	</script>
+
+</head>
+
+<body>
+<table id="dg"  class="easyui-datagrid" style="width:100%;height:100%"
+	   fitColumns="true" rownumbers="true" fit="true" pagination="true" toolbar="#tb" >
+	<thead>
+	<tr>
+		<th data-options="field:'phoneNum'">序号</th>
+		<th data-options="field:'callee'">会员编号</th>
+		<th data-options="field:'createTime'">真实姓名</th>
+		<th data-options="field:'status',formatter:setStatus">身份证号</th>
+		<th data-options="field:'statusUTime'">注册时间</th>
+		<th data-options="field:'companyName'">状态</th>
+		<th data-options="field:'siteName'">操作</th>
+	</tr>
+	</thead>
+</table>
+
+<div style="padding:5px;" id="tb" >
+	<form id="search" method="post" >
+		手机号码:<input type="text" id="phoneNum">起始时间:<input type="text" class="easyui-datebox" name="beginTime" id="beginTime" size="22" editable="false" />
+		&nbsp;截止时间:<input type="text" class="easyui-datebox" name="endTime" id="endTime" size="22" editable="false" />
+		&nbsp;<a href="javascript:searchSmslog()" class="button" >查询 </a>
 	</form>
 </div>
-  
-<div class="pageContent">
-	<table class="table" targetType="navTab" asc="asc" desc="desc" width="100%" nowrapTD="false" layoutH="133">
-		<thead>
-			<tr>
-				<th>序号</th>
-				<th>会员编号</th>
-				<th>真实姓名</th>
-				<th>身份证号</th>
-				<th>注册时间</th>
-				<th>状态</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-<%--				<s:iterator value="recordList" status="st">
-				<tr target="sid_user" rel="${Id}">
-					<td>${st.index+1}</td>
-					<td>${memberNo}</td>
-				    <td>${realName}</td>
-					<td>${cardNo}</td>
-					<td><s:date name="createTime" format="yyyy-MM-dd HH:mm:ss" /></td>
-					<td>
-						<c:forEach items="${memberStatusList }" var="model">
-							<c:if test="${status eq model.value}">${model.desc }</c:if>
-						</c:forEach>
-					</td>
-					<td>
-						<z:permission value="member:info:view">
-							<a href="memberInfo_viewMemberInfo.action?id=${id}" title="查看会员详细信息" target="dialog"   style="color:blue">查看</a>
-						</z:permission>
-						<c:if test="${status != 103 }">
-							<z:permission value="member:info:changestatus">
-								<c:if test="${status == 101 }"> | <a href="memberInfo_toChangeMemberStatusUI.action?status=100&id=${id }" title="修改会员状态" target="dialog"  style="color:blue">激活</a></c:if>
-								<c:if test="${status == 100 }"> | <a href="memberInfo_toChangeMemberStatusUI.action?status=101&id=${id }" title="修改会员状态" target="dialog" rel="memberStop" style="color:blue">冻结</a></c:if>
-							</z:permission>
-							<z:permission value="member:info:resetpassword">
-								 <c:if test="${status == 100 }"> | <a href="memberInfo_resetPassword.action?id=${id }" title="确定要重置密码吗？" target="ajaxTodo"  style="color:blue">重置密码</a></c:if>
-							</z:permission>
-						</c:if>
-					</td>
-				</tr>
-				</s:iterator>--%>
-		</tbody>
-	</table>
-    <!-- 分页条 -->
-    <%@include file="/page/inc/pageBar.jsp"%>
-</div>
+
+</body>
+</html>
 
 
 <script>

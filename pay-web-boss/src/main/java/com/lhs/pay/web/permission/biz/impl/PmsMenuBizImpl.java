@@ -304,6 +304,11 @@ public class PmsMenuBizImpl implements IPmsMenuBiz {
         }
     }
 
+    @Override
+    public List<PmsMenu> buildTree(String roleIds) {
+        return pmsMenuDao.listByRoleIds(roleIds);
+    }
+
     /**
      * 构建管理后台的树形权限功能菜单
      *

@@ -1,5 +1,6 @@
 package com.lhs.pay.web.permission.controller;
 
+import com.google.code.kaptcha.Constants;
 import com.lhs.pay.common.enums.OperatorStatusEnum;
 import com.lhs.pay.common.web.constant.PermissionConstant;
 import com.lhs.pay.web.permission.biz.IPmsActionBiz;
@@ -7,7 +8,9 @@ import com.lhs.pay.web.permission.biz.IPmsMenuBiz;
 import com.lhs.pay.web.permission.biz.IPmsOperatorBiz;
 import com.lhs.pay.web.permission.biz.IPmsRoleBiz;
 import com.lhs.pay.web.permission.entity.PmsAction;
+import com.lhs.pay.web.permission.entity.PmsMenu;
 import com.lhs.pay.web.permission.entity.PmsOperator;
+import com.lhs.pay.web.permission.entity.vo.AuthMenuTreeVO;
 import com.lhs.pay.web.permission.exception.PermissionException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,8 +22,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.google.code.kaptcha.Constants;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -123,7 +125,7 @@ public class PmsLoginController {
 
                 try {
                     //获取用户的菜单权限
-                    model.put("tree", buildOperatorPermissionMenu(operator));
+                    //model.put("tree", buildOperatorPermissionMenu(operator));
 
                     //更新登陆数据
                     operator.setLastLoginTime(new Date());
@@ -200,5 +202,13 @@ public class PmsLoginController {
             actionList.add(pmsAction.getAction());
         }
         return actionList;
+    }
+
+    @RequestMapping(value = "/menu-tree-json", method = RequestMethod.GET)
+    @ResponseBody
+    public List menuTreeJson(HttpServletRequest request) {
+        PmsOperator pmsOperator = (PmsOperator) request.getSession().getAttribute(PermissionConstant.OPERATOR_SESSION_KEY);
+        String roleIds = pmsRoleBiz.getRoleIdsByOperatorId(pmsOperator.getId());
+        return pmsMenuBiz.buildTree(roleIds);
     }
 }
