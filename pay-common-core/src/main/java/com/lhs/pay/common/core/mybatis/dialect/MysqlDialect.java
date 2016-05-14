@@ -1,29 +1,27 @@
 package com.lhs.pay.common.core.mybatis.dialect;
 
 /**
- * MysqlDialect
+ * MySqlDialect
  *
  * @author longhuashen
  * @since 16/3/25
  */
-public class MysqlDialect extends Dialect {
+public class MySqlDialect extends Dialect {
 
-    @Override
-    public boolean supportLimit() {
+    public boolean supportsLimitOffset() {
         return true;
     }
 
-    @Override
-    public boolean supportLimitOffset() {
+    public boolean supportsLimit() {
         return true;
     }
 
-    @Override
     public String getLimitString(String sql, int offset, String offsetPlaceholder, int limit, String limitPlaceholder) {
+
         if (offset > 0) {
-            sql += " limit " + offsetPlaceholder + " ," + limitPlaceholder;
+            sql += " limit " + offsetPlaceholder + "," + limitPlaceholder;
         } else {
-            sql += " limit" + limitPlaceholder;
+            sql += " limit " + limitPlaceholder;
         }
 
         return sql;
