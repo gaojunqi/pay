@@ -14,9 +14,9 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="clone">
 		<!-- 基本属性driverClassName、 url、user、password -->
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${user.jdbc.url}" />
-		<property name="username" value="${user.jdbc.username}" />
-		<property name="password" value="${user.jdbc.password}" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/pay?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
 		
 		<!-- 配置初始化大小、最小、最大 -->
 		<!-- 通常来说，只需要修改initialSize、minIdle、maxActive -->
@@ -41,7 +41,7 @@
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒(300000:为5分钟) -->
 		<property name="minEvictableIdleTimeMillis" value="300000" />
 		<!-- 用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用。 -->
-		<property name="validationQuery" value="${jdbc.pool.validationQuery}" />
+		<property name="validationQuery" value="select current_timestamp()" />
 		<!-- 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。建议配置为true，不影响性能，并且保证安全性。-->
       	<property name="testWhileIdle" value="true" />
       	<!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。缺省值:true -->

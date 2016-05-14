@@ -39,7 +39,7 @@ public class MemberInfo extends BaseEntity {
     /**
      * 地址
      */
-    private String adddress;
+    private String address;
 
     /**
      * 固定电话
@@ -106,12 +106,12 @@ public class MemberInfo extends BaseEntity {
         this.cardNo = cardNo;
     }
 
-    public String getAdddress() {
-        return adddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdddress(String adddress) {
-        this.adddress = adddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getTelNo() {

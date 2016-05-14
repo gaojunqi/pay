@@ -13,31 +13,13 @@
 		 *短信查询
 		 */
 		function searchSmslog(){
-			/*
-			 $('#dg').datagrid({
-			 url:'system/smslog!querySmslogPage.action'
-			 });
-
-			 $('#dg').datagrid('load',{
-			 phoneNum:$("#phoneNum").val(),
-			 startTime:$("#beginTime").datebox('getValue'),
-			 endTime:$("#endTime").datebox('getValue')
-			 });
-			 $('#dg').datagrid('load',{
-			 url:url,
-			 phoneNum:$("#phoneNum").val(),
-			 startTime:$("#beginTime").datebox('getValue'),
-			 endTime:$("#endTime").datebox('getValue')
-			 });
-			 */
-			var url = "system/smslog!querySmslogPage.action";
+			var url = "/member/list.json";
 
 			$('#dg').datagrid({
 				url:url,
 				queryParams:{
-					phoneNum:$("#phoneNum").val(),
-					startTime:$("#beginTime").datebox('getValue'),
-					endTime:$("#endTime").datebox('getValue')
+					startDate:$("#beginTime").datebox('getValue'),
+					endDate:$("#endTime").datebox('getValue')
 				}
 			});
 		}
@@ -94,12 +76,12 @@
 	   fitColumns="true" rownumbers="true" fit="true" pagination="true" toolbar="#tb" >
 	<thead>
 	<tr>
-		<th data-options="field:'phoneNum'">序号</th>
-		<th data-options="field:'callee'">会员编号</th>
-		<th data-options="field:'createTime'">真实姓名</th>
-		<th data-options="field:'status',formatter:setStatus">身份证号</th>
-		<th data-options="field:'statusUTime'">注册时间</th>
-		<th data-options="field:'companyName'">状态</th>
+		<th data-options="field:'id'">序号</th>
+		<th data-options="field:'memberNo'">会员编号</th>
+		<th data-options="field:'realName'">真实姓名</th>
+		<th data-options="field:'cardNo'">身份证号</th>
+		<th data-options="field:'createTime'">注册时间</th>
+		<th data-options="field:'status'">状态</th>
 		<th data-options="field:'siteName'">操作</th>
 	</tr>
 	</thead>
@@ -107,8 +89,8 @@
 
 <div style="padding:5px;" id="tb" >
 	<form id="search" method="post" >
-		手机号码:<input type="text" id="phoneNum">起始时间:<input type="text" class="easyui-datebox" name="beginTime" id="beginTime" size="22" editable="false" />
-		&nbsp;截止时间:<input type="text" class="easyui-datebox" name="endTime" id="endTime" size="22" editable="false" />
+		手机号码:<input type="text" id="phoneNum">起始时间:<input type="text" class="easyui-datebox" name="startDate" id="beginTime" size="22" editable="false" />
+		&nbsp;截止时间:<input type="text" class="easyui-datebox" name="endDate" id="endTime" size="22" editable="false" />
 		&nbsp;<a href="javascript:searchSmslog()" class="button" >查询 </a>
 	</form>
 </div>

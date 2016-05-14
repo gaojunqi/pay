@@ -125,4 +125,68 @@ public class PageBean implements Serializable {
             }
         }
     }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getNumPerPage() {
+        return numPerPage;
+    }
+
+    public void setNumPerPage(int numPerPage) {
+        this.numPerPage = numPerPage;
+    }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public List<Object> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<Object> recordList) {
+        this.recordList = recordList;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public int getBeginPageIndex() {
+        return beginPageIndex;
+    }
+
+    public void setBeginPageIndex(int beginPageIndex) {
+        this.beginPageIndex = beginPageIndex;
+    }
+
+    public int getEndPageIndex() {
+        return endPageIndex;
+    }
+
+    public void setEndPageIndex(int endPageIndex) {
+        this.endPageIndex = endPageIndex;
+    }
+
+    public Map<String, Object> getCountResultMap() {
+        return countResultMap;
+    }
+
+    public void setCountResultMap(Map<String, Object> countResultMap) {
+        this.countResultMap = countResultMap;
+    }
 }

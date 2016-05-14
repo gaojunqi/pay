@@ -1,9 +1,14 @@
 package com.lhs.pay.common.core.mybatis.interceptor;
 
 import com.lhs.pay.common.core.mybatis.dialect.Dialect;
+import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
+import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.log4j.Logger;
 
@@ -15,39 +20,33 @@ import java.util.Properties;
  * @author longhuashen
  * @since 16/3/22
  */
+@Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class, RowBounds.class,
+        ResultHandler.class }) })
 public class ExecutorInterceptor extends AbstractInterceptor {
-
-    private static final Logger logger = Logger.getLogger(ExecutorInterceptor.class);
-
+    private final static Logger logger = Logger.getLogger(ExecutorInterceptor.class);
     private static int MAPPED_STATEMENT_INDEX = 0;
-
     private static int PARAMETER_INDEX = 1;
-
     private static int ROWBOUNDS_INDEX = 2;
 
     private Dialect dialect;
 
-    @Override
     public Object intercept(Invocation invocation) throws Throwable {
         processIntercept(invocation.getArgs());
         return invocation.proceed();
     }
 
-    private void processIntercept(Object[] queryArgs) {
-        MappedStatement mappedStatement = (MappedStatement) queryArgs[MAPPED_STATEMENT_INDEX];
-
+    private void processIntercept(final Object[] queryArgs) {
+        MappedStatement ms = (MappedStatement) queryArgs[MAPPED_STATEMENT_INDEX];
         Object parameter = queryArgs[PARAMETER_INDEX];
-        RowBounds rowBounds = (RowBounds) queryArgs[ROWBOUNDS_INDEX];
-
+        final RowBounds rowBounds = (RowBounds) queryArgs[ROWBOUNDS_INDEX];
         int offset = rowBounds.getOffset();
         int limit = rowBounds.getLimit();
-
-        //分页
-        if (dialect.supportLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT)) {
-            BoundSql boundSql = mappedStatement.getBoundSql(parameter);
+        // 分页
+        if (dialect.supportsLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT)) {
+            BoundSql boundSql = ms.getBoundSql(parameter);
 
             String sql = boundSql.getSql().replaceAll("\\s{2,}", " ").trim();
-            if (dialect.supportLimitOffset()) {
+            if (dialect.supportsLimitOffset()) {
                 sql = dialect.getLimitString(sql, offset, limit);
                 offset = RowBounds.NO_ROW_OFFSET;
             } else {
@@ -57,22 +56,19 @@ public class ExecutorInterceptor extends AbstractInterceptor {
             limit = RowBounds.NO_ROW_LIMIT;
 
             queryArgs[ROWBOUNDS_INDEX] = new RowBounds(offset, limit);
-            BoundSql newBoundSql = new BoundSql(mappedStatement.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
-            MappedStatement newMs = copyFromMappedStatement(mappedStatement, new BoundSqlSqlSource(newBoundSql), false);
+            BoundSql newBoundSql = new BoundSql(ms.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
+            MappedStatement newMs = copyFromMappedStatement(ms, new BoundSqlSqlSource(newBoundSql), false);
             queryArgs[MAPPED_STATEMENT_INDEX] = newMs;
 
-            logger.debug("===>" + sql);
-        } else if (parameter instanceof CountParameter) {
-            //获取总数
-            parameter = ((CountParameter) parameter).getParameter();
-            BoundSql boundSql = mappedStatement.getBoundSql(parameter);
+            logger.debug("==>" + sql);
 
-            String sql = boundSql.getSql()
-                                .replaceAll("\\s{2,}", " ")
-                                .replace(" FROM", " from")
-                                .replace("ORDER BY", "order by")
-                                .replace("GROUP BY", "group by")
-                                .trim();
+        } else if (parameter instanceof CountParameter) {
+            // 获取总数
+            parameter = ((CountParameter) parameter).getParameter();
+            BoundSql boundSql = ms.getBoundSql(parameter);
+
+            String sql = boundSql.getSql().replaceAll("\\s{2,}", " ").replace(" FROM", " from").replace("ORDER BY", "order by")
+                    .replace("GROUP BY", "group by").trim();
 
             if (sql.split("from").length > 2 || sql.split("order by").length > 2 || sql.indexOf("group by") > -1) {
                 sql = "select count(1) from (" + sql + ") tmp";
@@ -86,45 +82,47 @@ public class ExecutorInterceptor extends AbstractInterceptor {
                 }
             }
 
-            BoundSql newBoundSql = new BoundSql(mappedStatement.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
-            MappedStatement newMs = copyFromMappedStatement(mappedStatement, new BoundSqlSqlSource(newBoundSql), true);
+            BoundSql newBoundSql = new BoundSql(ms.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
+            MappedStatement newMs = copyFromMappedStatement(ms, new BoundSqlSqlSource(newBoundSql), true);
             queryArgs[MAPPED_STATEMENT_INDEX] = newMs;
             queryArgs[PARAMETER_INDEX] = parameter;
 
-            logger.debug("===>" + sql);
+            logger.debug("==>" + sql);
         }
-
-        //行锁标识
-        BoundSql boundSql = mappedStatement.getBoundSql(parameter);
-        String sql = boundSql.getSql().replace("\\s{2,}", " ").trim();
-
+        // 行锁标识
+        BoundSql boundSql = ms.getBoundSql(parameter);
+        String sql = boundSql.getSql().replaceAll("\\s{2,}", " ").trim();
         if (sql.toLowerCase().endsWith("for update")) {
 
-            if (this.dialect.getClass().getSimpleName().toLowerCase().endsWith("db2dialect")) {
-                sql += "with rs";
-            } else if (this.dialect.getClass().getSimpleName().toLowerCase().endsWith("oracledialect")) {
-
-            } else if (this.dialect.getClass().getSimpleName().toLowerCase().endsWith("mysqldialect")) {
-
+            if (this.dialect.getClass().getSimpleName().toLowerCase().equals("db2dialect")) {
+                // for update with rs
+                sql += " with rs";
+            } else if (this.dialect.getClass().getSimpleName().toLowerCase().equals("oracledialect")) {
+                // for update
+            } else if (this.dialect.getClass().getSimpleName().toLowerCase().equals("mysqldialect")) {
+                // for update
             }
 
             queryArgs[ROWBOUNDS_INDEX] = new RowBounds(offset, limit);
-            BoundSql newBoundSql = new BoundSql(mappedStatement.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
-            MappedStatement newMs = copyFromMappedStatement(mappedStatement, new BoundSqlSqlSource(newBoundSql), false);
+            BoundSql newBoundSql = new BoundSql(ms.getConfiguration(), sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
+            MappedStatement newMs = copyFromMappedStatement(ms, new BoundSqlSqlSource(newBoundSql), false);
             queryArgs[MAPPED_STATEMENT_INDEX] = newMs;
 
-            logger.debug("===>" + sql);
+            logger.debug("==>" + sql);
         }
     }
 
-    @Override
-    public Object plugin(Object o) {
-        return null;
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
     }
 
-    @Override
     public void setProperties(Properties properties) {
-
+        String dialectClass = properties.getProperty("dialectClass");
+        try {
+            dialect = (Dialect) Class.forName(dialectClass).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("cannot create dialect instance by dialectClass:" + dialectClass, e);
+        }
     }
 
     public static class CountParameter {
@@ -137,5 +135,20 @@ public class ExecutorInterceptor extends AbstractInterceptor {
         public Object getParameter() {
             return parameter;
         }
+    }
+
+    public static void main(String[] args) {
+        String sql = "select temp.* from (select id,var_3 as 'abc', var_4 as 'cde' from  youtable where 1=1 and var_3='1')group by var_3) as temp order by temp.id desc";
+
+        System.out.println(sql.split("from").length);
+
+        sql = sql.trim().replace("\r", "").replace("\n", "").replaceAll("\\s{2,}", " ").replace(" FROM ", " from ")
+                .replace("ORDER BY", "order by");
+        int fromIndex = sql.lastIndexOf(" from ");
+        sql = "select count(1)" + sql.substring(fromIndex);
+        int orderByIndex = sql.indexOf("order by");
+        sql = sql.substring(0, orderByIndex);
+
+        System.out.println("grop by asdfads".indexOf("group by"));
     }
 }

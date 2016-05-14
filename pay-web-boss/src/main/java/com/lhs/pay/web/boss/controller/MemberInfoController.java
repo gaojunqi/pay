@@ -1,5 +1,6 @@
 package com.lhs.pay.web.boss.controller;
 
+import com.lhs.pay.common.page.PageBean;
 import com.lhs.pay.common.page.PageParam;
 import com.lhs.pay.facade.user.enums.UserTypeEnum;
 import com.lhs.pay.facade.user.service.MemberInfoFacade;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,83 +38,35 @@ public class MemberInfoController extends BossBaseController {
     private MemberInfoFacade memberInfoFacade;
 
     @RequestMapping("/listMemberInfo")
-    public String listMemberInfo(
-                                 HttpServletRequest request,
-                                 HttpServletResponse response,
-                                 Model model) {
-        Map<String, Object> resultMap = new HashMap<>();
-        Map<String, Object> paramMap = new HashMap<>();
-        //校验时间
-//        if (startDate != null && endDate != null) {
-//            //取得两个日期之间的日数
-//            DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
-//            DateTime startDateTime = DateTime.parse(startDate, format);
-//            DateTime endDateTime = DateTime.parse(endDate, format);
-//            int days = Days.daysBetween(startDateTime, endDateTime).getDays();
-//
-//            if (days < 0) {
-//                //return this.operateError("开始时间不能大于结束时间");
-//            } else if ((startDate != null && endDate == null) || (startDate == null && endDate != null)) {
-//                //do
-//            }
-//
-//        }
-//        paramMap.put("startDate", startDate);
-//        paramMap.put("endDate", endDate);
-//        paramMap.put("status", status);
-//        paramMap.put("userType", UserTypeEnum.CUSTOMER.getValue());
-//
-//        String numPerPageStr =  request.getParameter("numPerPage");
-//        int numPerPage = 20;
-//        if (StringUtils.isNotBlank(numPerPageStr)) {
-//            numPerPage = Integer.parseInt(numPerPageStr);
-//        }
-//        int a = getPageNum();
-//System.out.println("=========================>" + memberInfoFacade.listPage(new PageParam(getPageNum(), numPerPage), paramMap));
-//        model.addAttribute("recordList", memberInfoFacade.listPage(new PageParam(getPageNum(), numPerPage), paramMap));
-        //model.addAttribute("memberStatusList", MemberStatusEnum)
+    public String listMemberInfo() {
         return "member/memberInfoList";
     }
 
-    @RequestMapping(value = "/list.json", method = RequestMethod.GET)
-    public Map<String, Object> list(@RequestParam("memberNo") String memberNo,
-                                              @RequestParam("realName") String realName,
-                                              @RequestParam("cardNo") String cardNo,
-                                              @RequestParam("startDate") String startDate,
-                                              @RequestParam("endDate") String endDate,
-                                              @RequestParam("status") String status,
-                                              HttpServletRequest request,
-                                              HttpServletResponse response,
-                                              Model model) {
+    @RequestMapping(value = "/list.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> list(@RequestParam(value = "memberNo", defaultValue = "") String memberNo,
+                                              @RequestParam(value = "realName", defaultValue = "") String realName,
+                                              @RequestParam(value = "cardNo", defaultValue = "") String cardNo,
+                                              @RequestParam(value = "startDate", required = false) Date startDate,
+                                              @RequestParam(value = "endDate", required = false) Date endDate,
+                                              @RequestParam(value = "status", required = false) String status,
+                                              @RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
+                                              @RequestParam(value = "rows", defaultValue = "10", required = false) Integer rows) {
         Map<String, Object> resultMap = new HashMap<>();
         Map<String, Object> paramMap = new HashMap<>();
         //校验时间
         if (startDate != null && endDate != null) {
-            //取得两个日期之间的日数
-            DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
-            DateTime startDateTime = DateTime.parse(startDate, format);
-            DateTime endDateTime = DateTime.parse(endDate, format);
-            int days = Days.daysBetween(startDateTime, endDateTime).getDays();
-
-            if (days < 0) {
-                //return this.operateError("开始时间不能大于结束时间");
-            } else if ((startDate != null && endDate == null) || (startDate == null && endDate != null)) {
-                //do
-            }
-
+            paramMap.put("startDate", startDate);
+            paramMap.put("endDate", endDate);
         }
-        paramMap.put("startDate", startDate);
-        paramMap.put("endDate", endDate);
         paramMap.put("status", status);
         paramMap.put("userType", UserTypeEnum.CUSTOMER.getValue());
 
-        String numPerPageStr =  request.getParameter("numPerPage");
-        int numPerPage = 20;
-        if (StringUtils.isNotBlank(numPerPageStr)) {
-            numPerPage = Integer.parseInt(numPerPageStr);
-        }
-        model.addAttribute("recordList", memberInfoFacade.listPage(new PageParam(getPageNum(), numPerPage), paramMap));
+
+        PageBean pageBean = memberInfoFacade.listPage(new PageParam(page, rows), paramMap);
         //model.addAttribute("memberStatusList", MemberStatusEnum)
-        return paramMap;
+        resultMap.put("total", pageBean.getTotalCount());
+        resultMap.put("rows", pageBean.getRecordList());
+        return resultMap;
     }
 }

@@ -8,15 +8,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.lhs.pay.common</groupId>
     <artifactId>pay-common-core</artifactId>
-    <packaging>pom</packaging>
+    <version>${pay-common-core.version}</version>
+    <packaging>jar</packaging>
 
     <name>pay-common-core</name>
     <url>http://maven.apache.org</url>
-    <modules>
-        <module>../pay-common-config</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -37,19 +37,18 @@
 
 	<!-- 在在mappers定义之前 -->
 	<typeHandlers>
-		<typeHandler javaType="Boolean" jdbcType="SMALLINT" handler="wusc.edu.pay.common.core.mybatis.BooleanTypeHandler" />
+		<typeHandler javaType="Boolean" jdbcType="SMALLINT" handler="com.lhs.pay.common.core.mybatis.BooleanTypeHandler" />
 	</typeHandlers>
-
 
 	<!-- 数据库适配器 -->
 	<plugins>
 		<plugin interceptor="com.lhs.pay.common.core.mybatis.interceptor.ExecutorInterceptor">
-			<property name="dialectClass" value="${dialectClass}" />
+			<property name="dialectClass" value="com.lhs.pay.common.core.mybatis.dialect.MySqlDialect" />
 		</plugin>
 	</plugins>
 
 	<mappers>
-
+		<mapper resource="mybatis/mapper/MemberInfo.Mapper.xml" />
 	</mappers>
 
 </configuration>

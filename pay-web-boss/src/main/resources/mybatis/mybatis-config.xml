@@ -47,7 +47,17 @@
 		<typeAlias alias="PmsRoleOperator" type="com.lhs.pay.web.permission.entity.PmsRoleOperator" />
 	</typeAliases>
 
+	<!-- 在在mappers定义之前 -->
+	<typeHandlers>
+		<typeHandler javaType="Boolean" jdbcType="SMALLINT" handler="com.lhs.pay.common.core.mybatis.BooleanTypeHandler" />
+	</typeHandlers>
 
+	<!-- 数据库适配器 -->
+	<plugins>
+		<plugin interceptor="com.lhs.pay.common.core.mybatis.interceptor.ExecutorInterceptor">
+			<property name="dialectClass" value="com.lhs.pay.common.core.mybatis.dialect.MySqlDialect" />
+		</plugin>
+	</plugins>
 
 	<mappers>
 		<mapper resource="mybatis/mapper/PmsAction.Mapper.xml" />
