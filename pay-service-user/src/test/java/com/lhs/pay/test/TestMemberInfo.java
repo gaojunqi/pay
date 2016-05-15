@@ -1,7 +1,6 @@
 package com.lhs.pay.test;
 
 import com.lhs.pay.common.page.PageParam;
-import com.lhs.pay.core.user.dao.MemberInfoDao;
 import com.lhs.pay.facade.user.enums.UserTypeEnum;
 import com.lhs.pay.facade.user.service.MemberInfoFacade;
 import org.junit.Test;
@@ -26,15 +25,12 @@ public class TestMemberInfo {
     @Autowired
     private MemberInfoFacade memberInfoFacade;
 
-    @Autowired
-    private MemberInfoDao memberInfoDao;
-
     @Test
-    public void testInsert() {
+    public void testListMemberInfo() {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("startDate", "2013-1-1");
         paramMap.put("endDate", "2015-1-1");
         paramMap.put("userType", UserTypeEnum.CUSTOMER.getValue());
-System.out.println("================" + memberInfoDao.listPage(new PageParam(0,20),paramMap));
+System.out.println("================" + memberInfoFacade.listPage(new PageParam(0,20),paramMap));
     }
 }
