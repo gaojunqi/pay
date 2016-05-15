@@ -12,14 +12,18 @@
 		/*
 		 *短信查询
 		 */
-		function searchSmslog(){
+		function search(){
 			var url = "/member/list.json";
 
 			$('#dg').datagrid({
 				url:url,
 				queryParams:{
+					memberNo:$('#memberNo').val(),
+					realName:$('#realName').val(),
+					cardNo:$('#cardNo').val(),
 					startDate:$("#beginTime").datebox('getValue'),
-					endDate:$("#endTime").datebox('getValue')
+					endDate:$("#endTime").datebox('getValue'),
+					status:$('#status').val()
 				}
 			});
 		}
@@ -89,9 +93,19 @@
 
 <div style="padding:5px;" id="tb" >
 	<form id="search" method="post" >
-		手机号码:<input type="text" id="phoneNum">起始时间:<input type="text" class="easyui-datebox" name="startDate" id="beginTime" size="22" editable="false" />
-		&nbsp;截止时间:<input type="text" class="easyui-datebox" name="endDate" id="endTime" size="22" editable="false" />
-		&nbsp;<a href="javascript:searchSmslog()" class="button" >查询 </a>
+		会员编号:<input type="text" id="memberNo">
+		真实姓名:<input type="text" id="realName">
+		身份证号:<input type="text" id="cardNo">
+		注册时间:<input type="text" class="easyui-datebox" name="startDate" id="beginTime" size="22" editable="false" />
+		-<input type="text" class="easyui-datebox" name="endDate" id="endTime" size="22" editable="false" />
+		<br>&nbsp;状态：<select name="status" id="status">
+		<option value="">--请选择--</option>
+		<c:forEach items="${memberStatusList }" var="model">
+			<option value="${model.value }"
+					<c:if test="${status eq model.value}">selected="selected"</c:if>>${model.desc }</option>
+		</c:forEach>
+	</select>
+		&nbsp;<a href="javascript:search()" class="button" >查询 </a>
 	</form>
 </div>
 

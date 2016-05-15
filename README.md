@@ -1,4 +1,4 @@
-### 一个支付系统
+### 简易支付系统
 
 
 # 
@@ -13,3 +13,7 @@
 | pay-facade-user |	用户服务接口   |
 | pay-service-user| 用户服务       |
 | pay-web-boss    | 运营管理系统    |
+
+# 技术架构
+
+![](./doc/screenshot.png)

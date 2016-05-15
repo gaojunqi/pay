@@ -2,6 +2,7 @@ package com.lhs.pay.web.boss.controller;
 
 import com.lhs.pay.common.page.PageBean;
 import com.lhs.pay.common.page.PageParam;
+import com.lhs.pay.facade.user.enums.MemberStatusEnum;
 import com.lhs.pay.facade.user.enums.UserTypeEnum;
 import com.lhs.pay.facade.user.service.MemberInfoFacade;
 import com.lhs.pay.web.boss.base.BossBaseController;
@@ -13,6 +14,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +40,8 @@ public class MemberInfoController extends BossBaseController {
     private MemberInfoFacade memberInfoFacade;
 
     @RequestMapping("/listMemberInfo")
-    public String listMemberInfo() {
+    public String listMemberInfo(ModelMap modelMap) {
+        modelMap.addAttribute("memberStatusList", MemberStatusEnum.toList());
         return "member/memberInfoList";
     }
 
@@ -59,12 +62,15 @@ public class MemberInfoController extends BossBaseController {
             paramMap.put("startDate", startDate);
             paramMap.put("endDate", endDate);
         }
+        paramMap.put("memberNo", memberNo);// 会员编号
+        paramMap.put("realName", realName);// 真实姓名
+        paramMap.put("cardNo", cardNo);// 身份证号
+
         paramMap.put("status", status);
         paramMap.put("userType", UserTypeEnum.CUSTOMER.getValue());
 
 
         PageBean pageBean = memberInfoFacade.listPage(new PageParam(page, rows), paramMap);
-        //model.addAttribute("memberStatusList", MemberStatusEnum)
         resultMap.put("total", pageBean.getTotalCount());
         resultMap.put("rows", pageBean.getRecordList());
         return resultMap;
