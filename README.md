@@ -38,4 +38,4 @@
 * easyui 界面框架
 * zTree 树框架
 
-![](./doc/screenshot.png)
+![](media/member_info.png)
