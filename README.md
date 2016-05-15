@@ -14,6 +14,28 @@
 | pay-service-user| 用户服务       |
 | pay-web-boss    | 运营管理系统    |
 
-# 技术架构
+### 技术架构
+
+#### 管理
+* maven依赖和项目管理
+* git版本控制
+
+#### 后端
+* IoC容器 Spring
+* web框架 SpringMvc
+* orm框架 Mybatis
+* rpc框架 Dubbo
+* 任务调度框架 quartz
+* 缓存 redis
+* 数据源 druid
+* 日志 slf4j+logback
+* Json jackson
+* jcaptcha 验证码
+* jsp 模板视图
+
+#### 前端
+* jquery js框架
+* easyui 界面框架
+* zTree 树框架
 
 ![](./doc/screenshot.png)
