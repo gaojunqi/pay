@@ -55,6 +55,7 @@
 
         <!-- web projects -->
         <pay-web-boss.version>1.0-SNAPSHOT</pay-web-boss.version>
+        <pay-web-portal.version>1.0-SNAPSHOT</pay-web-portal.version>
 
 
         <org.springframework.version>4.1.4.RELEASE</org.springframework.version>

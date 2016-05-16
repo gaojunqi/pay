@@ -13,6 +13,7 @@
 | pay-facade-user |	用户服务接口   |
 | pay-service-user| 用户服务       |
 | pay-web-boss    | 运营管理系统    |
+| pay-web-portal  | 门户系统        |
 
 ### 技术架构
 
