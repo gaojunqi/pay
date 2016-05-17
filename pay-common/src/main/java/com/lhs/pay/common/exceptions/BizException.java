@@ -48,12 +48,12 @@ public class BizException extends RuntimeException {
     /**
      * 异常信息
      */
-    private String msg;
+    protected String msg;
 
     /**
      * 异常具体码
      */
-    private int code;
+    protected int code;
 
     public String getMsg() {
         return msg;

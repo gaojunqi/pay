@@ -11,6 +11,7 @@
 | pay-common-web | 公共核心工程,web 工程共用  |    
 | 						|				              |
 | pay-facade-user |	用户服务接口   |
+| pay-facade-account |	账户服务接口   |
 | pay-service-user| 用户服务       |
 | pay-web-boss    | 运营管理系统    |
 | pay-web-portal  | 门户系统        |
