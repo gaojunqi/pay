@@ -43,7 +43,7 @@ public enum AccountOperationTypeEnum {
      */
     private String desc;
 
-    AccountOperationTypeEnum(int value, String desc) {
+    AccountOperationTypeEnum(String descj, int value) {
         this.value = value;
         this.desc = desc;
     }

@@ -31,7 +31,7 @@ public enum AccountInitiatorEnum {
      */
     private String desc;
 
-    AccountInitiatorEnum(int value, String desc) {
+    AccountInitiatorEnum(String desc, int value) {
         this.value = value;
         this.desc = desc;
     }
