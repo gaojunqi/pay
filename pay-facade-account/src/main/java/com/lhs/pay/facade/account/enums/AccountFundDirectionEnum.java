@@ -33,7 +33,7 @@ public enum AccountFundDirectionEnum {
      */
     private String desc;
 
-    AccountFundDirectionEnum(int value, String desc) {
+    AccountFundDirectionEnum(String desc, int value) {
         this.value = value;
         this.desc = desc;
     }
