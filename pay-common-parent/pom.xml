@@ -52,6 +52,7 @@
 
         <!--service-->
         <pay-service-user.version>1.0-SNAPSHOT</pay-service-user.version>
+        <pay-facade-account.version>1.0-SNAPSHOT</pay-facade-account.version>
 
         <!-- web projects -->
         <pay-web-boss.version>1.0-SNAPSHOT</pay-web-boss.version>

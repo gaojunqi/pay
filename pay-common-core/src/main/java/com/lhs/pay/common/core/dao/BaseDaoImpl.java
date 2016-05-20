@@ -243,7 +243,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
                 sql = "SELECT" + seqName.toUpperCase() + ".NEXTVAL FROM DUAL";
             }
 
-            if (driverClass.equals("com.mybatis,jdbc.Driver")) {
+            if (driverClass.equals("com.mybatis.jdbc.Driver")) {
                 sql = "SELECT FUN_SEQ('" + seqName.toUpperCase() + "')";
             }
 
