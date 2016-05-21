@@ -1,5 +1,7 @@
 package com.lhs.pay.core.account.biz.impl;
 
+import com.lhs.pay.common.exceptions.BizException;
+import com.lhs.pay.common.utils.Strings;
 import com.lhs.pay.core.account.biz.IAccountManagementBiz;
 import com.lhs.pay.core.account.dao.AccountDao;
 import com.lhs.pay.core.account.dao.AccountFrozenRecordDao;
@@ -53,7 +55,7 @@ public class AccountManagementBizImpl implements IAccountManagementBiz {
 
     @Override
     public String buildAccountNo(AccountTypeEnum accountType) {
-        String accountNo = accountDao.buildAccountNo("");
+        String accountNo = accountDao.buildAccountNo(Strings.leftPadWithBytes(String.valueOf(accountType.getValue()), 3, '0', "UTF_8"));
         log.info("===>buildAccountNo:" + accountNo);
         return accountNo;
     }
@@ -62,7 +64,7 @@ public class AccountManagementBizImpl implements IAccountManagementBiz {
     public long createAccount(String userNo, String accountNo, int accountType) {
         log.info("===>createAccount");
 
-        String titleNo = "";
+        String titleNo;
         if (AccountTypeEnum.CUSTOMER.getValue() == accountType) {
             titleNo = "2001";
         } else if (AccountTypeEnum.PRIVATE.getValue() == accountType) {
@@ -109,7 +111,54 @@ public class AccountManagementBizImpl implements IAccountManagementBiz {
             throw AccountBizException.ACCOUNT_NOT_EXIT.print();
         }
 
+        account.setStatus(chooseOperationType(operationType));
         AccountFrozenRecord accountFrozenRecord = new AccountFrozenRecord();
+        accountFrozenRecord.setLastTime(new Date());
+        accountFrozenRecord.setAccountNo(account.getAccountNo());
+        accountFrozenRecord.setRemark(desc);
+        accountFrozenRecord.setInitiator(accountInitiator.getValue());
+        accountFrozenRecord.setOperationType(operationType.getValue());
+
         accountFrozenRecordDao.insert(accountFrozenRecord);
+    }
+
+    private static int chooseOperationType(AccountOperationTypeEnum operationType) {
+        int value = 0;
+        switch (operationType) {
+            case FREEZE_DEBIT:
+                value = AccountStatusEnum.INACTIVE_FREEZE_DEBIT.getValue();
+                break;
+            case UNFREEZE_DEBIT:
+                value = AccountStatusEnum.ACTIVE.getValue();
+                break;
+            case FREEZE_CREDIT:
+                value = AccountStatusEnum.INACTIVE_FREEZE_DEBIT.getValue();
+                break;
+            case UNFREEZE_CREDIT:
+                value = AccountStatusEnum.ACTIVE.getValue();
+                break;
+            case FREEZE_ACCOUNT:
+                value = AccountStatusEnum.INACTIVE.getValue();
+                break;
+            case UNFREEZE_ACCOUNT:
+                value = AccountStatusEnum.ACTIVE.getValue();
+                break;
+            case CREATE_ACCOUNT:
+                value = AccountStatusEnum.ACTIVE.getValue();
+                break;
+            case FREEZE_FUND:
+                value = AccountStatusEnum.INACTIVE.getValue();
+                break;
+            case UNFEEZE_FUND:
+                value = AccountStatusEnum.ACTIVE.getValue();
+                break;
+            case CANCLE_ACCOUNT:
+                value = AccountStatusEnum.CANCELLED.getValue();
+                break;
+            default:
+                //log.error("==>AccountOperationTypeEnum:", operationType);
+                throw new BizException("传入的操作类型有误！");
+        }
+        return value;
     }
 }
