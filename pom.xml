@@ -53,7 +53,7 @@
         <module>pay-common-web</module>
         <module>pay-facade-account</module>
         <module>pay-facade-user</module>
-        <module>pay-service-user</module>
+        <module>pay-service-account</module>
         <module>pay-service-user</module>
         <module>pay-web-boss</module>
         <module>pay-web-portal</module>
