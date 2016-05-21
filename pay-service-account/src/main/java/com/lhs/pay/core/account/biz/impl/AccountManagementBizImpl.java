@@ -12,8 +12,8 @@ import com.lhs.pay.facade.account.enums.AccountOperationTypeEnum;
 import com.lhs.pay.facade.account.enums.AccountStatusEnum;
 import com.lhs.pay.facade.account.enums.AccountTypeEnum;
 import com.lhs.pay.facade.account.exception.AccountBizException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,7 @@ import java.util.Date;
 @Transactional(rollbackFor = Exception.class)
 public class AccountManagementBizImpl implements IAccountManagementBiz {
 
-    private static final Log log = LogFactory.getLog(AccountManagementBizImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountManagementBizImpl.class);
 
     @Autowired
     private AccountDao accountDao;
@@ -156,7 +156,7 @@ public class AccountManagementBizImpl implements IAccountManagementBiz {
                 value = AccountStatusEnum.CANCELLED.getValue();
                 break;
             default:
-                //log.error("==>AccountOperationTypeEnum:", operationType);
+                log.error("==>AccountOperationTypeEnum:", operationType);
                 throw new BizException("传入的操作类型有误！");
         }
         return value;
