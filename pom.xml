@@ -38,6 +38,27 @@
 
     </profiles>
 
+    <repositories>
+        <repository>
+        <id>myNexus</id>
+        <name>myNexus</name>
+        <url>http://192.168.1.103:8081/nexus/content/repositories/central/</url>
+        </repository>
+    </repositories>
+
+    <modules>
+        <module>pay-common</module>
+        <module>pay-common-config</module>
+        <module>pay-common-core</module>
+        <module>pay-common-web</module>
+        <module>pay-facade-account</module>
+        <module>pay-facade-user</module>
+        <module>pay-service-user</module>
+        <module>pay-service-user</module>
+        <module>pay-web-boss</module>
+        <module>pay-web-portal</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- common projects -->
