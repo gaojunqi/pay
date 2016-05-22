@@ -43,7 +43,7 @@
 	<!-- 数据库适配器 -->
 	<plugins>
 		<plugin interceptor="com.lhs.pay.common.core.mybatis.interceptor.ExecutorInterceptor">
-			<property name="dialectClass" value="com.lhs.pay.common.core.mybatis.dialect.MySqlDialect" />
+			<property name="dialectClass" value="com.lhs.pay.common.core.mybatis.dialect.MysqlDialect" />
 		</plugin>
 	</plugins>
 

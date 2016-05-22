@@ -1,12 +1,14 @@
 package com.lhs.pay.common.core.mybatis.dialect;
 
 /**
- * MySqlDialect
+ * MysqlDialect
  *
  * @author longhuashen
- * @since 16/3/25
+ * @since 16/5/22
  */
-public class MySqlDialect extends Dialect {
+public class MysqlDialect extends Dialect {
+
+
 
     public boolean supportsLimitOffset() {
         return true;
