@@ -106,6 +106,14 @@
                     <include>spring-context.xml</include>
                 </includes>
             </resource>
+            <resource>
+                <targetPath>${project.build.directory}</targetPath>
+                <directory>src/main/scripts</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.sh</include>
+                </includes>
+            </resource>
         </resources>
         <pluginManagement>
             <plugins>
