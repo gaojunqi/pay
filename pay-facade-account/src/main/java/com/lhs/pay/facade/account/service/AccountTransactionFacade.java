@@ -73,5 +73,5 @@ public interface AccountTransactionFacade {
      * @param tradeTypeEnum
      * @throws AccountBizException
      */
-    void unFrozen_debit(String userNo, double amount, String requestNo, AccountTradeTypeEnum tradeTypeEnum) throws AccountBizException;
+    void unFrozen_debit(String userNo, double amount, String requestNo, AccountTradeTypeEnum tradeTypeEnum, double fee) throws AccountBizException;
 }
