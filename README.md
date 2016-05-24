@@ -21,6 +21,7 @@
 #### 管理
 * maven依赖和项目管理
 * git版本控制
+* Jenkins持续构建
 
 #### 后端
 * IoC容器 Spring
@@ -30,9 +31,9 @@
 * 任务调度框架 quartz
 * 缓存 redis
 * 数据源 druid
-* 日志 slf4j+logback
+* 日志 slf4j+log4j2
 * Json jackson
-* jcaptcha 验证码
+* kaptcha 验证码
 * jsp 模板视图
 
 #### 前端
@@ -40,4 +41,9 @@
 * easyui 界面框架
 * zTree 树框架
 
+##### 运营管理后台
 ![](media/member_info.png)
+
+##### 服务和注册中心、dubbo-admin后台等放在树莓派上
+![](media/raspi.jpg)
+![](media/dubbo.png)

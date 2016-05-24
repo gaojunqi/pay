@@ -45,7 +45,7 @@ public class AccountSettBizImpl implements IAccountSettBiz {
         List<AccountTransactionVo> voList = new ArrayList<>();
         //账户资金冻结
         AccountTransactionVo vo = new AccountTransactionVo();
-        vo.setAccountFundDirectionEnum(AccountFundDirectionEnum.FROZEN);
+        vo.setAccountFundDirection(AccountFundDirectionEnum.FROZEN);
         vo.setUserNo(userNo);
         vo.setFrezonAmount(settAmount);
         vo.setRequestNo(requestNo);
