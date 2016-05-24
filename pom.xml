@@ -84,7 +84,7 @@
         <org.apache.struts.version>2.3.15.1</org.apache.struts.version>
 
         <junit.version>4.12</junit.version>
-
+        <guava.version>18.0</guava.version>
         <jackson.version>2.5.0</jackson.version>
         <jackson.dataformat.xml.version>2.5.0</jackson.dataformat.xml.version>
         <joda.time.version>2.7</joda.time.version>
@@ -444,6 +444,11 @@
                 <groupId>google.code</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tomcat</groupId>

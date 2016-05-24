@@ -1,7 +1,7 @@
 package com.lhs.pay.core.account.biz.impl;
 
+import com.google.common.base.Strings;
 import com.lhs.pay.common.exceptions.BizException;
-import com.lhs.pay.common.utils.Strings;
 import com.lhs.pay.core.account.biz.IAccountManagementBiz;
 import com.lhs.pay.core.account.dao.AccountDao;
 import com.lhs.pay.core.account.dao.AccountFrozenRecordDao;
@@ -15,7 +15,7 @@ import com.lhs.pay.facade.account.exception.AccountBizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -26,7 +26,7 @@ import java.util.Date;
  * @author longhuashen
  * @since 16/5/20
  */
-@Component("accountManagementBiz")
+@Service("accountManagementBiz")
 @Transactional(rollbackFor = Exception.class)
 public class AccountManagementBizImpl implements IAccountManagementBiz {
 
@@ -55,7 +55,7 @@ public class AccountManagementBizImpl implements IAccountManagementBiz {
 
     @Override
     public String buildAccountNo(AccountTypeEnum accountType) {
-        String accountNo = accountDao.buildAccountNo(Strings.leftPadWithBytes(String.valueOf(accountType.getValue()), 3, '0', "UTF_8"));
+        String accountNo = accountDao.buildAccountNo(Strings.padStart(String.valueOf(accountType.getValue()), 3, '0'));
         log.info("===>buildAccountNo:" + accountNo);
         return accountNo;
     }
@@ -96,7 +96,7 @@ public class AccountManagementBizImpl implements IAccountManagementBiz {
         account.setStatus(AccountStatusEnum.ACTIVE.getValue());
         account.setAccountTitleNo(titleNo);
         account.setBalance(balance);
-        account.setSecurityBalance(securityMoney);
+        account.setSecurityMoney(securityMoney);
 
         return accountDao.insert(account);
     }
@@ -123,7 +123,7 @@ public class AccountManagementBizImpl implements IAccountManagementBiz {
     }
 
     private static int chooseOperationType(AccountOperationTypeEnum operationType) {
-        int value = 0;
+        int value;
         switch (operationType) {
             case FREEZE_DEBIT:
                 value = AccountStatusEnum.INACTIVE_FREEZE_DEBIT.getValue();

@@ -15,6 +15,63 @@
         <result property="status" column="STATUS"/>
         <result property="userNo" column="USERNO"/>
         <result property="accountType" column="ACCOUNTTYPE"/>
+        <result property="lastTime" column="LASTTIME"/>
+        <result property="availableSettAmount" column="AVAILABLESETTAMOUNT"/>
+        <result property="accountTitleNo" column="ACCOUNTTITLENO"/>
     </resultMap>
 
+    <insert id="insert" parameterType="Account" keyProperty="id" useGeneratedKeys="true">
+      insert into <include refid="table"/>
+        (VERSION, CREATETIME, BALANCE, ACCOUNTNO, UNBALANCE, SECURITYMONEY, STATUS, USERNO, ACCOUNTTYPE, LASTTIME,AVAILABLESETTAMOUNT,ACCOUNTTITLENO)
+      values (0, #{createTime}, #{balance}, #{accountNo}, #{unBalance}, #{securityMoney}, #{status}, #{userNo}, #{accountType}, #{lastTime}, #{availableSettAmount}, #{accountTitleNo})
+    </insert>
+
+    <update id="update" parameterType="Account">
+       update 
+       <include refid="table"/>
+       <set>
+           VERSION = #{version} + 1,
+           BALANCE = #{balance},
+           UNBALANCE = #{unBalance},
+           SECURITYMONEY = #{securityMoney},
+           STATUS = #{status},
+           ACCOUNTTYPE = #{accountType},
+           LASTTIME = #{lastTime},
+           AVAILABLESETTAMOUNT = #{availableSettAmount},
+           USERNO = #{userNo}
+       </set>
+       <where>
+           ID = #{id} and VERSION = #{version}
+       </where>
+    </update>
+
+    <sql id="condition_sql">
+      <if test="beginDate != null and endDate != null and endDate != '' and beginDate != ''">
+          and CREATETIME between #{beginDate} and CONCAT(#{endDate}, ' 23:59:59')
+      </if>
+      <if test="accountNo != null and accountNo != ''">
+          and ACCOUNTNO = #{accountNo}
+      </if>
+      <if test="userNo != null and userNo != ''">
+          and USERNO = #{userNo}
+      </if>
+      <if test="accountType != null and accountType != ''">
+          and ACCOUNTTYPE = #{accountType}
+      </if>
+      <if test="accountTitleNo != null and accountTitleNo != ''">
+          and ACCOUNTTITLENO = #{accountTitleNo}
+      </if>
+      <!--是否行锁-->
+      <if test="isPessimist != null and isPessimist == true">
+          for update
+      </if>
+    </sql>
+
+    <select id="listBy" parameterType="java.util.Map" resultType="beanMap">
+        select * from 
+        <include refid="table"/>
+        <where>
+            <include refid="codition_sql"/>
+        </where>
+    </select>
 </mapper>

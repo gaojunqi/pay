@@ -18,12 +18,12 @@ public class AccountTransactionVo implements Serializable {
     /**
      * 资金方向
      */
-    private AccountFundDirectionEnum accountFundDirectionEnum;
+    private AccountFundDirectionEnum accountFundDirection;
 
     /**
      * 交易码
      */
-    private AccountTradeTypeEnum accountTradeTypeEnum;
+    private AccountTradeTypeEnum tradeType;
 
     /**
      * 用户编号
@@ -65,20 +65,12 @@ public class AccountTransactionVo implements Serializable {
      */
     private Integer riskDay;
 
-    public AccountFundDirectionEnum getAccountFundDirectionEnum() {
-        return accountFundDirectionEnum;
+    public AccountFundDirectionEnum getAccountFundDirection() {
+        return accountFundDirection;
     }
 
-    public void setAccountFundDirectionEnum(AccountFundDirectionEnum accountFundDirectionEnum) {
-        this.accountFundDirectionEnum = accountFundDirectionEnum;
-    }
-
-    public AccountTradeTypeEnum getAccountTradeTypeEnum() {
-        return accountTradeTypeEnum;
-    }
-
-    public void setAccountTradeTypeEnum(AccountTradeTypeEnum accountTradeTypeEnum) {
-        this.accountTradeTypeEnum = accountTradeTypeEnum;
+    public void setAccountFundDirection(AccountFundDirectionEnum accountFundDirection) {
+        this.accountFundDirection = accountFundDirection;
     }
 
     public double getAmount() {
@@ -127,6 +119,14 @@ public class AccountTransactionVo implements Serializable {
 
     public void setRiskDay(Integer riskDay) {
         this.riskDay = riskDay;
+    }
+
+    public AccountTradeTypeEnum getTradeType() {
+        return tradeType;
+    }
+
+    public void setTradeType(AccountTradeTypeEnum tradeType) {
+        this.tradeType = tradeType;
     }
 
     public double getUnFrezonAmount() {
