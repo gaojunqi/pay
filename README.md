@@ -49,4 +49,4 @@
 ![](media/dubbo.png)
 
 #### 商户账户管理中心
-![](media/merchant-center.png
+![](media/merchant-center.png)
