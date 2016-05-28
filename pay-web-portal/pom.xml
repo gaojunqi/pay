@@ -40,6 +40,63 @@
             <artifactId>pay-common-web</artifactId>
             <version>${pay-common-web.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.lhs.pay.facade</groupId>
+            <artifactId>pay-facade-user</artifactId>
+            <version>${pay-facade-user.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lhs.pay.facade</groupId>
+            <artifactId>pay-facade-account</artifactId>
+            <version>${pay-facade-account.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+
+        <!-- dubbo 需要的jar start -->
+        <dependency>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <!-- dubbo 需要的jar end -->
+
+        <!-- 测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>pay-web-portal</finalName>

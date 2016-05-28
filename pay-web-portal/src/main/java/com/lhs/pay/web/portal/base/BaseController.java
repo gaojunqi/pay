@@ -8,5 +8,4 @@ package com.lhs.pay.web.portal.base;
  */
 public class BaseController {
 
-
 }
