@@ -23,6 +23,12 @@
 
 	
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service retries="0"  interface="com.lhs.pay.facade.account.service.AccountManagementFacade" ref="accountManagementFacade" />
+	<dubbo:service retries="0" interface="com.lhs.pay.facade.account.service.AccountManagementFacade" ref="accountManagementFacade" />
+	<!-- 账户交易 -->
+	<dubbo:service retries="0" interface="com.lhs.pay.facade.account.service.AccountTransactionFacade" ref="accountTransactionFacade" />
+	<!-- 账户查询 -->
+	<dubbo:service retries="0" interface="com.lhs.pay.facade.account.service.AccountQueryFacade" ref="accountQueryFacade" />
+	<!-- 结算专用 -->
+	<dubbo:service retries="0" interface="com.lhs.pay.facade.account.service.AccountSettFacade" ref="accountSettFacade" />
 	
 </beans>  

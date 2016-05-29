@@ -26,6 +26,12 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <servlet>
+        <servlet-name>InitialServlet</servlet-name>
+        <servlet-class>com.lhs.pay.web.portal.listener.ContextLoaderInit</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
     <!--springMvc DispatcherServlet-->
     <servlet>
         <servlet-name>springmvc</servlet-name>

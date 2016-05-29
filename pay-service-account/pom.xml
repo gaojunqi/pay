@@ -91,6 +91,11 @@
       <scope>test</scope>
     </dependency>
     <!-- 多线程测试工具 End -->
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

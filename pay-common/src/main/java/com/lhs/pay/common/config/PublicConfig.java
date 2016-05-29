@@ -112,12 +112,12 @@ public class PublicConfig {
     /**
      * 密码错误限制时间（分钟）
      */
-    public final static boolean IS_USER_KAPTCHA = Boolean.parseBoolean(PUBLIC_USER.get("IS_USER_KAPTCHA"));
+    public final static boolean IS_USE_KAPTCHA = Boolean.parseBoolean(PUBLIC_USER.get("IS_USER_KAPTCHA"));
 
     /**
      * 密码错误次数值 将出现验证码，如果值为0 则永远不会出现验证码
      */
-    public final static Integer PWD_TIMES_USE_KAPCTHA = Integer.parseInt(PUBLIC_USER.get("PWD_TIMES_USE_KAPTCHA"));
+    public final static Integer PWD_TIMES_USE_KAPTCHA = Integer.parseInt(PUBLIC_USER.get("PWD_TIMES_USE_KAPTCHA"));
 
     /**
      * 是否使用CFCA密码控件

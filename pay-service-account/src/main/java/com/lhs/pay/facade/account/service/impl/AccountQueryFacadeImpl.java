@@ -1,5 +1,6 @@
 package com.lhs.pay.facade.account.service.impl;
 
+import com.google.common.base.Strings;
 import com.lhs.pay.common.page.PageBean;
 import com.lhs.pay.common.page.PageParam;
 import com.lhs.pay.core.account.dao.AccountDao;
@@ -9,7 +10,6 @@ import com.lhs.pay.facade.account.entity.AccountHistory;
 import com.lhs.pay.facade.account.exception.AccountBizException;
 import com.lhs.pay.facade.account.service.AccountQueryFacade;
 import com.lhs.pay.facade.account.vo.DailyCollectAccountHistoryVo;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class AccountQueryFacadeImpl implements AccountQueryFacade {
 
     @Override
     public Account getAccountByUserNo(String userNo) throws AccountBizException {
-        if (Strings.isBlank(userNo)) {
+        if (Strings.isNullOrEmpty(userNo)) {
             return null;
         }
         return accountDao.getByUserNo_IsPessimist(userNo, false);

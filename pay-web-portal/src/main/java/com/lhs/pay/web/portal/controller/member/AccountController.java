@@ -1,7 +1,5 @@
 package com.lhs.pay.web.portal.controller.member;
 
-import com.lhs.pay.facade.account.entity.Account;
-import com.lhs.pay.facade.account.enums.AccountStatusEnum;
 import com.lhs.pay.facade.account.service.AccountQueryFacade;
 import com.lhs.pay.facade.user.entity.UserInfo;
 import com.lhs.pay.web.portal.base.BaseConsts;
@@ -24,11 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 public class AccountController {
 
 
-    //private AccountQueryFacade accountQueryFacade;
+    @Autowired
+    private AccountQueryFacade accountQueryFacade;
 
     @RequestMapping(value = "/viewAccount", method = RequestMethod.GET)
     public String viewAccount(HttpServletRequest request, ModelMap modelMap) {
-//        UserInfo userInfo = (UserInfo)request.getSession().getAttribute(BaseConsts.CURRENT_USER);
+        UserInfo userInfo = (UserInfo)request.getSession().getAttribute(BaseConsts.CURRENT_USER);
 //        Account account = accountQueryFacade.getAccountByUserNo(userInfo.getAccountNo());
 //
 //        modelMap.put("account", account);

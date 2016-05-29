@@ -2,11 +2,9 @@ package com.lhs.pay.web.portal.base;
 
 /**
  * BaseConsts
- * <p/>
- * 基础常量类
  *
  * @author longhuashen
- * @since 16/5/28
+ * @since 16/5/29
  */
 public class BaseConsts {
 
