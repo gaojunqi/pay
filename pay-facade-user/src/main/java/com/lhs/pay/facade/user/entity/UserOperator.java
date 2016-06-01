@@ -1,5 +1,7 @@
 package com.lhs.pay.facade.user.entity;
 
+import com.lhs.pay.common.entity.BaseEntity;
+
 import java.util.Date;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Date;
  * @author longhuashen
  * @since 16/5/29
  */
-public class UserOperator {
+public class UserOperator extends BaseEntity {
 
     /**
      * 用户编号

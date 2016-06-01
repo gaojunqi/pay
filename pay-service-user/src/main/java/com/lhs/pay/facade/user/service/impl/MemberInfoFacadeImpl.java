@@ -3,7 +3,7 @@ package com.lhs.pay.facade.user.service.impl;
 import com.lhs.pay.common.exceptions.BizException;
 import com.lhs.pay.common.page.PageBean;
 import com.lhs.pay.common.page.PageParam;
-import com.lhs.pay.core.user.dao.MemberInfoDao;
+import com.lhs.pay.core.user.dao.IMemberInfoDao;
 import com.lhs.pay.facade.user.entity.MemberInfo;
 import com.lhs.pay.facade.user.exceptions.UserBizException;
 import com.lhs.pay.facade.user.service.MemberInfoFacade;
@@ -25,30 +25,30 @@ import java.util.Map;
 public class MemberInfoFacadeImpl implements MemberInfoFacade {
 
     @Autowired
-    private MemberInfoDao memberInfoDao;
+    private IMemberInfoDao IMemberInfoDao;
 
     @Override
     public MemberInfo getMemberByUserNo(String userNo) throws UserBizException {
-        return memberInfoDao.getMemberInfoByMemberNo(userNo);
+        return IMemberInfoDao.getMemberInfoByMemberNo(userNo);
     }
 
     @Override
     public PageBean listPage(PageParam pageParam, Map<String, Object> paramMap) throws UserBizException {
-        return memberInfoDao.listPage(pageParam, paramMap);
+        return IMemberInfoDao.listPage(pageParam, paramMap);
     }
 
     @Override
     public long update(MemberInfo memberInfo) throws UserBizException {
-        return memberInfoDao.update(memberInfo);
+        return IMemberInfoDao.update(memberInfo);
     }
 
     @Override
     public MemberInfo getById(Long memberId) throws UserBizException {
-        return memberInfoDao.getById(memberId);
+        return IMemberInfoDao.getById(memberId);
     }
 
     @Override
     public Map<String, Object> countMember(List<Map<String, Object>> listBlackUser, List<Map<String, Object>> listFreezeUser) throws BizException {
-        return memberInfoDao.countMember(listBlackUser, listFreezeUser);
+        return IMemberInfoDao.countMember(listBlackUser, listFreezeUser);
     }
 }

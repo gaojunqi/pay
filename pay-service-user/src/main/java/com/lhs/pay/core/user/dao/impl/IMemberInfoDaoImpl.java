@@ -1,7 +1,7 @@
 package com.lhs.pay.core.user.dao.impl;
 
 import com.lhs.pay.common.core.dao.BaseDaoImpl;
-import com.lhs.pay.core.user.dao.MemberInfoDao;
+import com.lhs.pay.core.user.dao.IMemberInfoDao;
 import com.lhs.pay.facade.user.entity.MemberInfo;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * MemberInfoDaoImpl
+ * IMemberInfoDaoImpl
  *
  * 会员信息表数据访问层接口实现类
  *
@@ -19,7 +19,7 @@ import java.util.Map;
  * @since 16/3/28
  */
 @Repository("memberInfoDao")
-public class MemberInfoDaoImpl extends BaseDaoImpl<MemberInfo> implements MemberInfoDao {
+public class IMemberInfoDaoImpl extends BaseDaoImpl<MemberInfo> implements IMemberInfoDao {
 
     @Override
     public List findByCardNo(String cardNo) {

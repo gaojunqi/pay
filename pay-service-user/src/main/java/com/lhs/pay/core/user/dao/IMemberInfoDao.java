@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * MemberInfoDao
+ * IMemberInfoDao
  * 会员信息表数据访问层接口
  *
  * @author longhuashen
  * @since 16/3/21
  */
-public interface MemberInfoDao extends BaseDao<MemberInfo> {
+public interface IMemberInfoDao extends BaseDao<MemberInfo> {
 
     /**
      * 根据身份证号码查询
