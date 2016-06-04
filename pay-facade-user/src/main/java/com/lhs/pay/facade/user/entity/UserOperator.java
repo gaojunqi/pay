@@ -65,9 +65,22 @@ public class UserOperator extends BaseEntity {
     private Date lastLoginTime;
 
     /**
+     * 最后一次登录密码错误时间
+     */
+    private Date pwdErrorLastTime;
+
+    /**
      * 最后一次修改时间
      */
     private Date lastAlertPwdTime;
+
+    public Date getPwdErrorLastTime() {
+        return pwdErrorLastTime;
+    }
+
+    public void setPwdErrorLastTime(Date pwdErrorLastTime) {
+        this.pwdErrorLastTime = pwdErrorLastTime;
+    }
 
     public Integer getIsChangePwd() {
         return isChangePwd;

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * IMemberInfoDaoImpl
+ * MemberInfoDaoImpl
  *
  * 会员信息表数据访问层接口实现类
  *
@@ -19,7 +19,7 @@ import java.util.Map;
  * @since 16/3/28
  */
 @Repository("memberInfoDao")
-public class IMemberInfoDaoImpl extends BaseDaoImpl<MemberInfo> implements IMemberInfoDao {
+public class MemberInfoDaoImpl extends BaseDaoImpl<MemberInfo> implements IMemberInfoDao {
 
     @Override
     public List findByCardNo(String cardNo) {
