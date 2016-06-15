@@ -6,14 +6,14 @@ import com.lhs.pay.facade.user.entity.MerchantAction;
 import java.util.List;
 
 /**
- * MerchantActionDao
+ * IMerchantActionDao
  *
  * 商户权限管理--权限功能点表数据访问层接口
  *
  * @author longhuashen
  * @since 16/6/15
  */
-public interface MerchantActionDao extends BaseDao<MerchantAction> {
+public interface IMerchantActionDao extends BaseDao<MerchantAction> {
 
     /**
      * 根据实体ID字符串获取对象列表
