@@ -5,14 +5,14 @@ import com.lhs.pay.common.entity.BaseEntity;
 import java.util.Date;
 
 /**
- * UserAuditRecordClose
+ * UserAuditRecordStatus
  *
- * 用户注销审核表
+ * 用户状态审核表
  *
  * @author longhuashen
- * @since 16/6/3
+ * @since 16/6/15
  */
-public class UserAuditRecordClose extends BaseEntity {
+public class UserAuditRecordStatus extends BaseEntity {
 
     /**
      * 用户编号
@@ -20,64 +20,74 @@ public class UserAuditRecordClose extends BaseEntity {
     private String userNo;
 
     /**
-     * 公司名称
+     * 公司全称
      */
     private String fullName;
 
     /**
      * 登录名
-     */
+     **/
     private String loginName;
 
     /**
      * 用户类型：会员、在线商户、pos商户
-     */
+     **/
     private Integer userType;
 
     /**
-     * 审核状态：审核通过 审核不通过 未审核
-     */
+     * 审核状态：审核通过，审核不通过，未审核
+     **/
     private Integer auditStatus;
 
     /**
      * 申请描述
-     */
+     **/
     private String applyDesc;
 
     /**
      * 审核描述
-     */
+     **/
     private String auditDesc;
 
     /**
-     * 审核操作员的登录名
-     */
+     * 审核操作员的登陆名
+     **/
     private String auditOperatorLoginName;
 
     /**
-     * 审核操作员的名字
-     */
+     * 什么操作员的名字
+     **/
     private String auditOperatorName;
 
     /**
      * 处理时间
-     */
+     **/
     private Date dealTime;
 
     /**
-     * 申请操作员的名字
-     */
+     * 变更状态
+     **/
+    private Integer changeStatus;
+
+    /**
+     * 当前状态
+     **/
+    private Integer currentStatus;
+
+    /**
+     * 申请操作员的登陆名
+     **/
     private String applyOperatorLoginName;
 
     /**
-     * 是否可以登录 1：可以 2：不可以
-     */
-    private Integer isLogin;
+     * 申请操作员的名字
+     **/
+    private String applyOperatorName;
 
     /**
-     * 时间间隔，如果大于7，商户审核列表才给审核按钮
-     */
-    private Integer timeInterval;
+     * 实际变更状态
+     **/
+    private Integer actualChangeStatus;
 
     public String getUserNo() {
         return userNo;
@@ -159,6 +169,22 @@ public class UserAuditRecordClose extends BaseEntity {
         this.dealTime = dealTime;
     }
 
+    public Integer getChangeStatus() {
+        return changeStatus;
+    }
+
+    public void setChangeStatus(Integer changeStatus) {
+        this.changeStatus = changeStatus;
+    }
+
+    public Integer getCurrentStatus() {
+        return currentStatus;
+    }
+
+    public void setCurrentStatus(Integer currentStatus) {
+        this.currentStatus = currentStatus;
+    }
+
     public String getApplyOperatorLoginName() {
         return applyOperatorLoginName;
     }
@@ -167,19 +193,19 @@ public class UserAuditRecordClose extends BaseEntity {
         this.applyOperatorLoginName = applyOperatorLoginName;
     }
 
-    public Integer getIsLogin() {
-        return isLogin;
+    public String getApplyOperatorName() {
+        return applyOperatorName;
     }
 
-    public void setIsLogin(Integer isLogin) {
-        this.isLogin = isLogin;
+    public void setApplyOperatorName(String applyOperatorName) {
+        this.applyOperatorName = applyOperatorName;
     }
 
-    public Integer getTimeInterval() {
-        return timeInterval;
+    public Integer getActualChangeStatus() {
+        return actualChangeStatus;
     }
 
-    public void setTimeInterval(Integer timeInterval) {
-        this.timeInterval = timeInterval;
+    public void setActualChangeStatus(Integer actualChangeStatus) {
+        this.actualChangeStatus = actualChangeStatus;
     }
 }
