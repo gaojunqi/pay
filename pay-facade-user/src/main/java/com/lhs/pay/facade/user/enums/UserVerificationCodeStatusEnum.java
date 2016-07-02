@@ -6,27 +6,28 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * UserAuditStatusEnum
+ * UserVerificationCodeStatusEnum
  *
- * 用户审核状态
+ * 用户验证码状态
  *
  * @author longhuashen
- * @since 16/6/4
+ * @since 16/7/2
  */
-public enum UserAuditStatusEnum {
+public enum UserVerificationCodeStatusEnum {
 
-    AGREE("同意", 100), REFUSE("拒绝", 101), WAIT("处理中", 102);
+    ALREADY("已验证", 100),
+    NOT("未验证", 101),
+    EXPIRED("已过期", 101);
 
+    /** 枚举值 */
     private int value;
 
+    /** 描述 */
     private String desc;
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
+    private UserVerificationCodeStatusEnum(String desc, int value) {
         this.value = value;
+        this.desc = desc;
     }
 
     public String getDesc() {
@@ -37,37 +38,41 @@ public enum UserAuditStatusEnum {
         this.desc = desc;
     }
 
-    UserAuditStatusEnum(String desc, int value) {
+    public void setValue(int value) {
         this.value = value;
-        this.desc = desc;
     }
 
-    public static UserAuditStatusEnum getEnum(int value) {
-        UserAuditStatusEnum resultEnum = null;
-        UserAuditStatusEnum[] enumArray = UserAuditStatusEnum.values();
-        for (int i = 0; i < enumArray.length; i++) {
-            if (enumArray[i].getValue() == value) {
-                resultEnum = enumArray[i];
+    public int getValue() {
+        return value;
+    }
+
+    public static UserVerificationCodeStatusEnum getEnum(int value) {
+        UserVerificationCodeStatusEnum resultEnum = null;
+        UserVerificationCodeStatusEnum[] enumAry = UserVerificationCodeStatusEnum.values();
+        for (int i = 0; i < enumAry.length; i++) {
+            if (enumAry[i].getValue() == value) {
+                resultEnum = enumAry[i];
                 break;
             }
         }
         return resultEnum;
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static List toList() {
-        UserAuditStatusEnum[] arrayEnum = UserAuditStatusEnum.values();
+        UserVerificationCodeStatusEnum[] ary = UserVerificationCodeStatusEnum.values();
         List list = new ArrayList();
-        for (int i = 0; i < arrayEnum.length; i++) {
+        for (int i = 0; i < ary.length; i++) {
             Map<String, String> map = new HashMap<>();
-            map.put("value", String.valueOf(arrayEnum[i].getValue()));
-            map.put("desc", arrayEnum[i].getDesc());
+            map.put("value", String.valueOf(ary[i].getValue()));
+            map.put("desc", ary[i].getDesc());
             list.add(map);
         }
         return list;
     }
 
     public static Map<String, Map<String, Object>> toMap() {
-        UserAuditStatusEnum[] ary = UserAuditStatusEnum.values();
+        UserVerificationCodeStatusEnum[] ary = UserVerificationCodeStatusEnum.values();
         Map<String, Map<String, Object>> enumMap = new HashMap<>();
         for (int num = 0; num < ary.length; num++) {
             Map<String, Object> map = new HashMap<>();
