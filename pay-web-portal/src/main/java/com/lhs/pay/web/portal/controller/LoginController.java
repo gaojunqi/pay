@@ -1,12 +1,14 @@
-package com.lhs.pay.web.portal.controller.merchant;
+package com.lhs.pay.web.portal.controller;
 
 import com.google.code.kaptcha.Constants;
+import com.google.common.base.Strings;
+import com.lhs.pay.common.config.PublicConfig;
 import com.lhs.pay.common.enums.ArticleTypeEnum;
 import com.lhs.pay.common.enums.PublicStatusEnum;
 import com.lhs.pay.facade.user.entity.UserInfo;
 import com.lhs.pay.facade.user.entity.UserOperator;
 import com.lhs.pay.facade.user.service.UserManagementFacade;
-import org.apache.logging.log4j.util.Strings;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,7 +33,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap modelMap) {
         modelMap.put("userType", "merchant");
-        modelMap.put("type", ArticleTypeEnum.NOTICE.getValue());
+        modelMap.put("type", ArticleTypeEnum.NOTICE.getValue());//通知、公告
         modelMap.put("status", PublicStatusEnum.ACTIVE.getValue());
         modelMap.put("articleType", 1);
         return "login";
@@ -41,11 +43,12 @@ public class LoginController {
     public String login(@RequestParam("userType") String userType,
                         @RequestParam("userType") String loginName,
                         @RequestParam("userType") String randomcode,
+                        @RequestParam("password") String password,
                         HttpServletRequest request,
                         ModelMap modelMap) {
         String kaptchaCode = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         if (!"flase".equals(randomcode)) {
-            if (Strings.isBlank(kaptchaCode)) {
+            if (Strings.isNullOrEmpty(kaptchaCode)) {
                 modelMap.put("loginMsg", "请输入验证码");
                 modelMap.put("userType", userType);
                 modelMap.put("loginName", loginName);
@@ -61,7 +64,7 @@ public class LoginController {
         UserOperator userOperator = null;
 
         if ("merchant".equals(userType)) {
-//            UserInfo userInfo = userManagementFacade.
+//            UserInfo userInfo = userManagementFacade.merchantLogin(loginName, DigestUtils.sha1Hex(password), PublicConfig.PWD_ERROR_LIMIT_TIMES, PublicConfig.PWD_ERROR_LIMIT_TIME);
         }
         return "login";
     }

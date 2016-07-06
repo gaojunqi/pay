@@ -13,7 +13,7 @@ import com.lhs.pay.facade.user.exceptions.UserBizException;
 public interface UserManagementFacade {
 
     /**
-     * 会员注册
+     * 会员信息注册
      *
      * @param loginName 登录名
      * @param loginPwd  登陆密码
@@ -110,4 +110,16 @@ public interface UserManagementFacade {
                           String legalPerson,
                           String cardNo) throws UserBizException, RpcException;
 
+    /**
+     * 商户登录
+     *
+     * @param loginName
+     * @param loginPwd
+     * @param pwdErrMaxTimes
+     * @param validMinute
+     * @return
+     * @throws UserBizException
+     * @throws RpcException
+     */
+    UserInfo merchantLogin(String loginName, String loginPwd, Integer pwdErrMaxTimes, Integer validMinute) throws UserBizException, RpcException;
 }

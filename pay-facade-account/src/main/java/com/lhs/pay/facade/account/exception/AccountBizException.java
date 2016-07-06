@@ -1,8 +1,8 @@
 package com.lhs.pay.facade.account.exception;
 
 import com.lhs.pay.common.exceptions.BizException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * AccountBizException
@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class AccountBizException extends BizException {
 
-    private static final Log log = LogFactory.getLog(AccountBizException.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountBizException.class);
 
     public static final AccountBizException ACCOUNT_NOT_EXIT = new AccountBizException(20080001, "账户不存在");
 

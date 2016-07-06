@@ -29,8 +29,8 @@ public class AccountController {
     @Autowired
     private AccountQueryFacade accountQueryFacade;
 
-    @Autowired
-    private MemberInfoFacade memberInfoFacade;
+//    @Autowired
+//    private MemberInfoFacade memberInfoFacade;
 
 //    private UserQueryFacade userQueryFacade;
 
@@ -40,17 +40,17 @@ public class AccountController {
         Account account = accountQueryFacade.getAccountByUserNo(userInfo.getAccountNo());
 
 //        modelMap.put("availableBalance", )
-        modelMap.put("account", account);
+//        modelMap.put("account", account);
 
-        //账户状态
-        modelMap.put("accountStatusEnum", AccountStatusEnum.values());
-
-        //积分
-//        modelMap.put("loginScore", )
-        modelMap.put("accountStatusList", AccountStatusEnum.values());
-        modelMap.put("lastLoginDate", request.getSession().getAttribute(BaseConsts.CURRENT_USER_OPERATOR));
-        modelMap.put("member", userInfo.getUserNo());
-        modelMap.put("PublicStatusEnum", PublicStatusEnum.values());
+//        //账户状态
+//        modelMap.put("accountStatusEnum", AccountStatusEnum.values());
+//
+//        //积分
+////        modelMap.put("loginScore", )
+//        modelMap.put("accountStatusList", AccountStatusEnum.values());
+//        modelMap.put("lastLoginDate", request.getSession().getAttribute(BaseConsts.CURRENT_USER_OPERATOR));
+//        modelMap.put("member", userInfo.getUserNo());
+//        modelMap.put("PublicStatusEnum", PublicStatusEnum.values());
         return "merchant/account/accountView";
     }
 }
