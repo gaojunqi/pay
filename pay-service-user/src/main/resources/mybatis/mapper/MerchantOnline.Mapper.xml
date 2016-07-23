@@ -4,7 +4,7 @@
 
 	<sql id="table"> TBL_USER_MERCHANT_ONLINE </sql>
 	
-	<resultMap id="beanMap" type="wusc.edu.pay.facade.user.entity.MerchantOnline" >
+	<resultMap id="beanMap" type="com.lhs.pay.facade.user.entity.MerchantOnline" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="VERSION" property="version" jdbcType="SMALLINT" />
     <result column="CREATETIME" property="createTime" />
@@ -58,7 +58,7 @@
      
   </resultMap>
 
-	<insert id="insert" parameterType="wusc.edu.pay.facade.user.entity.MerchantOnline" keyProperty="id" useGeneratedKeys="true">
+	<insert id="insert" parameterType="com.lhs.pay.facade.user.entity.MerchantOnline" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO
 		<include refid="table" />
 		( VERSION,
@@ -151,7 +151,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="wusc.edu.pay.facade.user.entity.MerchantOnline">
+	<update id="update" parameterType="com.lhs.pay.facade.user.entity.MerchantOnline">
 		UPDATE
 		<include refid="table" />
 		<set>

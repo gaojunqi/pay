@@ -42,7 +42,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 
     public static final String SQL_LIST_PAGE = "listPage";
 
-    public static final String SQL_LIST_By = "listBy";
+    public static final String SQL_LIST_BY = "listBy";
 
     /**
      * 根据当前分页参数进行统计
@@ -197,7 +197,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 
     @Override
     public List<T> listBy(Map<String, Object> paramMap) {
-        return (List) this.listBy(paramMap, SQL_LIST_By);
+        return (List) this.listBy(paramMap, SQL_LIST_BY);
     }
 
     @Override
@@ -211,7 +211,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 
     @Override
     public T getBy(Map<String, Object> paramMap) {
-        return (T) this.getBy(paramMap, SQL_LIST_By);
+        return (T) this.getBy(paramMap, SQL_LIST_BY);
     }
 
     @Override

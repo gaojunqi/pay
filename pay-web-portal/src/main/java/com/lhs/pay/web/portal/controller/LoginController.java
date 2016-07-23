@@ -27,8 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
 
-//    @Autowired
-//    private UserManagementFacade userManagementFacade;
+    @Autowired
+    private UserManagementFacade userManagementFacade;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap modelMap) {
@@ -41,13 +41,13 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("userType") String userType,
-                        @RequestParam("userType") String loginName,
-                        @RequestParam("userType") String randomcode,
-                        @RequestParam("password") String password,
+                        @RequestParam("loginName") String loginName,
+                        @RequestParam("randomCode") String randomcode,
+                        @RequestParam("loginPwd") String password,
                         HttpServletRequest request,
                         ModelMap modelMap) {
         String kaptchaCode = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        if (!"flase".equals(randomcode)) {
+        if (!"false".equals(randomcode)) {
             if (Strings.isNullOrEmpty(kaptchaCode)) {
                 modelMap.put("loginMsg", "请输入验证码");
                 modelMap.put("userType", userType);
@@ -64,7 +64,7 @@ public class LoginController {
         UserOperator userOperator = null;
 
         if ("merchant".equals(userType)) {
-//            UserInfo userInfo = userManagementFacade.merchantLogin(loginName, DigestUtils.sha1Hex(password), PublicConfig.PWD_ERROR_LIMIT_TIMES, PublicConfig.PWD_ERROR_LIMIT_TIME);
+             UserInfo userInfo = userManagementFacade.merchantLogin(loginName, DigestUtils.sha1Hex(password), PublicConfig.PWD_ERROR_LIMIT_TIMES, PublicConfig.PWD_ERROR_LIMIT_TIME);
         }
         return "login";
     }

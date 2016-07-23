@@ -80,7 +80,7 @@
 		<if test="roleName != null and roleName != ''"> and ROLENAME like concat(#{roleName}, '%')</if>
 	</sql>
 
-	<select id="listPage" parameterType="MerchantNo" resultMap="beanMap">
+	<select id="listPage" parameterType="MerchantRole" resultMap="beanMap">
 		select * from
 		<include refid="table"/>
 		<where>

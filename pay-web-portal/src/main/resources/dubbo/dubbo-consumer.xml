@@ -18,4 +18,7 @@
 
 	<!-- 账户子系统服务接口引用 -->
 	<import resource="dubbo-reference-account.xml"/>
+
+	<!-- 用户子系统服务接口引用 -->
+	<import resource="dubbo-reference-user.xml"/>
 </beans>  

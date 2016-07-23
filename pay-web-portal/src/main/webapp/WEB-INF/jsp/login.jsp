@@ -211,7 +211,7 @@
 											<input type="text" name="randomCode" id="randomCode" size="8" class="test" />
 
 										</div>
-										<img alt="验证码" src="randomCode.jpg" onclick="changeCode(this);" height="35" width="80px">
+										<img alt="验证码" src="/randomCode.jpg" onclick="changeCode(this);" height="35" width="80px">
 									</div>
 									</c:when>
 										<c:otherwise>

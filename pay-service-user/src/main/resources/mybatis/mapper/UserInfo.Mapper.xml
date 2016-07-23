@@ -130,7 +130,7 @@
 		select USERNO as "code", USERNO as "name", REALNAME as "desc" from
 		<include refid="table"/>
 		<where>
-			<include refid="codition_sql"/>
+			<include refid="condition_sql"/>
 		</where>
 	</select>
 </mapper>

@@ -33,6 +33,33 @@
 
 	<typeAliases>
 		<typeAlias alias="MemberInfo" type="com.lhs.pay.facade.user.entity.MemberInfo" />
+
+		<typeAlias alias="MerchantOnline" type="com.lhs.pay.facade.user.entity.MerchantOnline" />
+		<!-- 用户信息表 -->
+		<typeAlias alias="UserInfo" type="com.lhs.pay.facade.user.entity.UserInfo" />
+		<typeAlias alias="UserOperator" type="com.lhs.pay.facade.user.entity.UserOperator" />
+		<typeAlias alias="UserOperatorLog" type="com.lhs.pay.facade.user.entity.UserOperatorLog" />
+
+		<!-- 用户信息审核表 -->
+		<typeAlias alias="UserAuditRecordStatus" type="com.lhs.pay.facade.user.entity.UserAuditRecordStatus" />
+		<typeAlias alias="UserAuditRecordClose" type="com.lhs.pay.facade.user.entity.UserAuditRecordClose" />
+		<typeAlias alias="UserAuditRecordRealName" type="com.lhs.pay.facade.user.entity.UserAuditRecordRealName" />
+		<!-- 用户银行卡账户信息表 -->
+		<typeAlias alias="UserBankAccount" type="com.lhs.pay.facade.user.entity.UserBankAccount" />
+
+		<typeAlias alias="MerchantFile" type="com.lhs.pay.facade.user.entity.MerchantFile" />
+
+		<typeAlias alias="MerchantAction" type="com.lhs.pay.facade.user.entity.MerchantAction" />
+		<typeAlias alias="MerchantRole" type="com.lhs.pay.facade.user.entity.MerchantRole" />
+		<typeAlias alias="MerchantRoleAction" type="com.lhs.pay.facade.user.entity.MerchantRoleAction" />
+		<typeAlias alias="MerchantRoleOperator" type="com.lhs.pay.facade.user.entity.MerchantRoleOperator" />
+		<typeAlias alias="MerchantSecret" type="com.lhs.pay.facade.user.entity.MerchantSecret" />
+		<typeAlias alias="PortalCa" type="com.lhs.pay.facade.user.entity.PortalCa" />
+
+		<typeAlias alias="UserTradePwd" type="com.lhs.pay.facade.user.entity.UserTradePwd" />
+
+		<!-- 用户验证码信息表 -->
+		<typeAlias alias="UserVerificationCode" type="com.lhs.pay.facade.user.entity.UserVerificationCode" />
 	</typeAliases>
 
 	<!-- 在在mappers定义之前 -->
@@ -49,6 +76,23 @@
 
 	<mappers>
 		<mapper resource="mybatis/mapper/MemberInfo.Mapper.xml" />
+		<mapper resource="mybatis/mapper/MerchantAction.Mapper.xml" />
+		<mapper resource="mybatis/mapper/MerchantFile.Mapper.xml" />
+		<mapper resource="mybatis/mapper/MerchantOnline.Mapper.xml" />
+		<mapper resource="mybatis/mapper/MerchantRole.Mapper.xml" />
+		<mapper resource="mybatis/mapper/MerchantRoleAction.Mapper.xml" />
+		<mapper resource="mybatis/mapper/MerchantRoleOperator.Mapper.xml" />
+		<mapper resource="mybatis/mapper/MerchantSecret.Mapper.xml" />
+		<mapper resource="mybatis/mapper/PortalCA.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserAuditRecordClose.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserAuditRecordRealName.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserAuditRecordStatus.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserBankAccount.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserInfo.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserOperateLog.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserOperator.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserTradePwd.Mapper.xml" />
+		<mapper resource="mybatis/mapper/UserVerificationCode.Mapper.xml" />
 	</mappers>
 
 </configuration>
