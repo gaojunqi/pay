@@ -16,7 +16,7 @@
 		<result property="status" column="STATUS"/>
 		<result property="type" column="TYPE"/>
 		<result property="lastLoginTime" column="LASTLOGINTIME"/>
-		<result property="isChangePwd" column="ISCHANGEPWD"/>
+		<result property="isChangedPwd" column="ISCHANGEDPWD"/>
 		<result property="pwdErrorTimes" column="PWDERRORTIMES"/>
 		<result property="pwdErrorLastTime" column="PWDERRORLASTTIME"/>
 		<result property="lastAlertPwdTime" column="LASTALERTPWDTIME"/>
@@ -27,7 +27,7 @@
 		<include refid="table"/>
 		(VERSION, CREATETIME, USERNO,LOGINNAME, LOGINPWD,
 		REALNAME,MOBILENO,STATUS, TYPE, LASTLOGINTIME,
-		ISCHANGEPWD,PWDERRORTIMES,PWDERRORLASTTIME,LASTALERTPWDTIME
+		ISCHANGEDPWD,PWDERRORTIMES,PWDERRORLASTTIME,LASTALERTPWDTIME
 		)
 		values
 		(
@@ -49,7 +49,7 @@
 			STATUS = #{status},
 			TYPE = #{type},
 			LASTLOGINTIME = #{lastLoginTime, jdbcType=TIMESTAMP},
-			ISCHANGEPWD = #{isChangedPwd, jdbcType=SMALLINT},
+			ISCHANGEDPWD = #{isChangedPwd, jdbcType=SMALLINT},
 			PWDERRORTIMES = #{pwdErrorTimes},
 			PWDERRORLASTTIME = #{pwdErrorLastTime},
 			LASTALERTPWDTIME = #{lastAlertPwdTime}

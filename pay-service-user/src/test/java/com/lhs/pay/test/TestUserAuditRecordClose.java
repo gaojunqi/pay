@@ -25,6 +25,6 @@ public class TestUserAuditRecordClose {
 
     @Test
     public void testGetByUserNo_auditStatus() {
-        UserInfo userInfo = userManagementFacade.merchantLogin("admin", DigestUtils.sha1Hex("admin888"), PublicConfig.PWD_ERROR_LIMIT_TIMES, PublicConfig.PWD_ERROR_LIMIT_TIME);
+        UserInfo userInfo = userManagementFacade.merchantLogin("1288888888@gzzyzz.com", DigestUtils.sha1Hex("123456"), PublicConfig.PWD_ERROR_LIMIT_TIMES, PublicConfig.PWD_ERROR_LIMIT_TIME);
     }
 }

@@ -58,6 +58,11 @@ public class UserInfo extends BaseEntity {
     private String bindEmail;
 
     /**
+     * 省份
+     */
+    private String province;
+
+    /**
      * 所属地区
      */
     private String city;
@@ -90,12 +95,20 @@ public class UserInfo extends BaseEntity {
     /**
      * 是否手机验证
      */
-    private Integer isPhoneAuth;
+    private Integer isMobileAuth;
 
     /**
      * 是否实名认证
      */
-    private Integer isRealAuth;
+    private Integer isRealNameAuth;
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
 
     public String getAccountNo() {
         return accountNo;
@@ -169,20 +182,20 @@ public class UserInfo extends BaseEntity {
         this.isEmailAuth = isEmailAuth;
     }
 
-    public Integer getIsPhoneAuth() {
-        return isPhoneAuth;
+    public Integer getIsMobileAuth() {
+        return isMobileAuth;
     }
 
-    public void setIsPhoneAuth(Integer isPhoneAuth) {
-        this.isPhoneAuth = isPhoneAuth;
+    public void setIsMobileAuth(Integer isMobileAuth) {
+        this.isMobileAuth = isMobileAuth;
     }
 
-    public Integer getIsRealAuth() {
-        return isRealAuth;
+    public Integer getIsRealNameAuth() {
+        return isRealNameAuth;
     }
 
-    public void setIsRealAuth(Integer isRealAuth) {
-        this.isRealAuth = isRealAuth;
+    public void setIsRealNameAuth(Integer isRealNameAuth) {
+        this.isRealNameAuth = isRealNameAuth;
     }
 
     public String getLoginName() {

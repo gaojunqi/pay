@@ -52,7 +52,7 @@ public class UserOperator extends BaseEntity {
     /**
      * 是否更改过密码
      */
-    private Integer isChangePwd;
+    private Integer isChangedPwd;
 
     /**
      * 登陆密码错误次数
@@ -82,12 +82,12 @@ public class UserOperator extends BaseEntity {
         this.pwdErrorLastTime = pwdErrorLastTime;
     }
 
-    public Integer getIsChangePwd() {
-        return isChangePwd;
+    public Integer getIsChangedPwd() {
+        return isChangedPwd;
     }
 
-    public void setIsChangePwd(Integer isChangePwd) {
-        this.isChangePwd = isChangePwd;
+    public void setIsChangedPwd(Integer isChangedPwd) {
+        this.isChangedPwd = isChangedPwd;
     }
 
     public Date getLastAlertPwdTime() {

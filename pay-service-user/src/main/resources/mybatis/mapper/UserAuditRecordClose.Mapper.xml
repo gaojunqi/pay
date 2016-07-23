@@ -74,10 +74,10 @@
 		<if test="userNo != null and userNo != ''"> and USERNO = #{userNo}</if>
 		<if test="auditStatus != null and auditStatus != ''"> and AUDITSTATUS = #{auditStatus}</if>
 		<if test="auditOperatorName != null and auditOperatorName != ''"> and AUDITOPERATORNAME = #{auditOperatorName}</if>
-		<if test="applyOperatorLoginName != null and applyOperatorLoginName != ''">and APPLYOPERATORLOGINNAME = #{applyOperatorLoginName}</if>
+		<if test="applyOperatorLoginName != null and applyOperatorLoginName != ''"> and APPLYOPERATORLOGINNAME = #{applyOperatorLoginName}</if>
 	</sql>
 
-	<select id="listBy">
+	<select id="listBy" parameterType="java.util.Map" resultMap="beanMap">
 		select * from
 		<include refid="table"/>
 		<where>

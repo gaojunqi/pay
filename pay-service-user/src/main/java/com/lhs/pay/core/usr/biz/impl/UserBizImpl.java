@@ -48,8 +48,6 @@ public class UserBizImpl implements IUserBiz {
         //用户销户记录
         UserAuditRecordClose userAuditRecordClose = userAuditRecordCloseDao.getByUserNo_auditStatus(userOperator.getUserNo(), UserAuditStatusEnum.AGREE.getValue());
 
-        Verify.verifyNotNull(userAuditRecordClose, "用户名或密码错误", loginName);
-
         //2.判断商户的状态
         if (OperatorStatusEnum.ACTIVE.getValue() == userOperator.getStatus()) {
             //判断是否存在商户
