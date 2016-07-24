@@ -1,7 +1,7 @@
 package com.lhs.pay.facade.user.service.impl;
 
 import com.alibaba.dubbo.rpc.RpcException;
-import com.lhs.pay.core.usr.biz.IUserBiz;
+import com.lhs.pay.core.user.biz.IUserBiz;
 import com.lhs.pay.facade.user.entity.UserInfo;
 import com.lhs.pay.facade.user.exceptions.UserBizException;
 import com.lhs.pay.facade.user.service.UserManagementFacade;

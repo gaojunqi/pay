@@ -10,4 +10,5 @@
     <!-- 用户接口 -->
     <dubbo:reference interface="com.lhs.pay.facade.user.service.MemberInfoFacade" id="memberInfoFacade" check="false"  />
     <dubbo:reference interface="com.lhs.pay.facade.user.service.UserManagementFacade" id="userManagementFacade" check="false"  />
-</beans>  
+    <dubbo:reference interface="com.lhs.pay.facade.user.service.UserOperatorFacade" id="userOperatorFacade" check="false"  />
+</beans>

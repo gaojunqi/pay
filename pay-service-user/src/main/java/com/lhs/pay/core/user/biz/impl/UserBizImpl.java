@@ -1,11 +1,10 @@
-package com.lhs.pay.core.usr.biz.impl;
+package com.lhs.pay.core.user.biz.impl;
 
-import com.google.common.base.Verify;
 import com.lhs.pay.common.enums.OperatorStatusEnum;
+import com.lhs.pay.core.user.biz.IUserBiz;
 import com.lhs.pay.core.user.dao.IUserAuditRecordCloseDao;
 import com.lhs.pay.core.user.dao.IUserInfoDao;
 import com.lhs.pay.core.user.dao.IUserOperatorDao;
-import com.lhs.pay.core.usr.biz.IUserBiz;
 import com.lhs.pay.facade.user.entity.UserAuditRecordClose;
 import com.lhs.pay.facade.user.entity.UserInfo;
 import com.lhs.pay.facade.user.entity.UserOperator;

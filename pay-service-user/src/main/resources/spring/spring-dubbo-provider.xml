@@ -25,4 +25,5 @@
 	<!-- 声明需要暴露的服务接口 -->
 	<dubbo:service retries="0"  interface="com.lhs.pay.facade.user.service.MemberInfoFacade" ref="memberInfoFacade" />
 	<dubbo:service retries="0"  interface="com.lhs.pay.facade.user.service.UserManagementFacade" ref="userManagementFacade" />
+	<dubbo:service retries="0"  interface="com.lhs.pay.facade.user.service.UserOperatorFacade" ref="userOperatorFacade" />
 </beans>  

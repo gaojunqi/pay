@@ -1,4 +1,4 @@
-package com.lhs.pay.core.usr.biz;
+package com.lhs.pay.core.user.biz;
 
 import com.lhs.pay.facade.user.entity.UserInfo;
 
