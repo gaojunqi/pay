@@ -70,6 +70,7 @@
 
         <!--facade-->
         <pay-facade-user.version>1.0-SNAPSHOT</pay-facade-user.version>
+        <pay-facade-boss.version>1.0-SNAPSHOT</pay-facade-boss.version>
 
         <!--service-->
         <pay-service-user.version>1.0-SNAPSHOT</pay-service-user.version>

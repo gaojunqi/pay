@@ -14,6 +14,7 @@
 | pay-facade-boss |	运营服务接口   |
 | pay-service-user| 用户服务       |
 | pay-service-account| 账户服务    |
+| pay-service-boss |	运营服务   |
 | pay-web-boss    | 运营管理系统    |
 | pay-web-portal  | 门户系统        |
 
