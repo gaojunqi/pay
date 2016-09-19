@@ -1,5 +1,7 @@
 package com.lhs.pay.facade.boss.entity;
 
+import com.lhs.pay.common.entity.BaseEntity;
+
 import java.util.Date;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Date;
  * @author longhuashen
  * @since 16/7/29
  */
-public class ContractManagement {
+public class ContractManagement extends BaseEntity {
 
     /**
      * 商户ID或者银行序号
